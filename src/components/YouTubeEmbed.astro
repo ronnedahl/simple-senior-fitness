@@ -1,0 +1,47 @@
+---
+// Click-to-load YouTube player. Nothing is requested from YouTube or Google
+// (not even the thumbnail) until the visitor presses play, so no cookies or
+// IP addresses reach them without the visitor's action (GDPR/ePrivacy).
+interface Props {
+  videoId: string;
+  title: string;
+}
+
+const { videoId, title } = Astro.props;
+---
+
+<youtube-embed data-video-id={videoId} data-title={title} class="relative block w-full h-full bg-gradient-to-br from-gray-800 to-gray-950 text-white">
+  <button
+    type="button"
+    class="group flex w-full h-full flex-col items-center justify-center gap-3 px-6 pb-10 text-center"
+    aria-label={`Play video: ${title}`}
+  >
+    <span class="flex size-16 items-center justify-center rounded-full bg-red-600 shadow-lg transition-transform group-hover:scale-110 lg:size-20">
+      <span class="material-symbols-outlined" style="font-size: 44px;" aria-hidden="true">play_arrow</span>
+    </span>
+    <span class="font-bold text-base lg:text-lg">{title}</span>
+  </button>
+  <p class="absolute inset-x-0 bottom-0 px-6 pb-3 text-center text-xs text-gray-300 lg:text-sm">
+    Plays from YouTube. Pressing play sends data to Google.
+    <a href="/privacy-policy#third-party" class="underline hover:text-white">Privacy policy</a>
+  </p>
+</youtube-embed>
+
+<script>
+  class YouTubeEmbed extends HTMLElement {
+    connectedCallback() {
+      this.querySelector('button')?.addEventListener('click', () => {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${this.dataset.videoId}?autoplay=1`;
+        iframe.title = this.dataset.title ?? 'YouTube video player';
+        iframe.className = 'w-full h-full border-0';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        iframe.allowFullscreen = true;
+        this.replaceChildren(iframe);
+      });
+    }
+  }
+
+  customElements.define('youtube-embed', YouTubeEmbed);
+</script>

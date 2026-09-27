@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import MedicalDisclaimer from '../components/MedicalDisclaimer.astro';
 import Sidebar from '../components/Sidebar.astro';
 import TraditionCard from '../components/TraditionCard.astro';
@@ -59,14 +60,7 @@ import ExploreMethods from '../components/ExploreMethods.astro';
         <!-- Video -->
         <div class="mb-12">
           <div class="w-full aspect-video rounded-2xl overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/TxVq-1u7z-M"
-              title="Seiza - Japanese Floor Sitting Posture"
-              class="w-full h-full"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+            <YouTubeEmbed videoId="TxVq-1u7z-M" title="Seiza - Japanese Floor Sitting Posture" />
           </div>
         </div>
 
