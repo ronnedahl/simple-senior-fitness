@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import Sidebar from '../components/Sidebar.astro';
 import PioneerCard from '../components/PioneerCard.astro';
 import towelStretchImage from '../assets/images/shared/towel-stretch-exercise.png';
@@ -103,14 +104,7 @@ import ExploreMethods from '../components/ExploreMethods.astro';
         <!-- Video Demonstration -->
         <div class="my-8 rounded-2xl overflow-hidden shadow-xl ring-1 ring-gray-900/5">
           <div class="aspect-video w-full">
-            <iframe
-              class="w-full h-full border-0"
-              src="https://www.youtube.com/embed/WqD0XQo934Q?si=0qeZgr0MvtrqDaO4"
-              title="Fukutsuji Method - Towel Stretch for Back Demonstration"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
+            <YouTubeEmbed videoId="WqD0XQo934Q" title="Fukutsuji Method - Towel Stretch for Back Demonstration" />
           </div>
           <div class="p-5">
             <h3 class="font-bold text-xl text-text-main-light mb-1">Watch: Fukutsuji Method Demonstration</h3>

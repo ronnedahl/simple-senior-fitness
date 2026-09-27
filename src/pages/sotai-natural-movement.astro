@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import MedicalDisclaimer from '../components/MedicalDisclaimer.astro';
 import Sidebar from '../components/Sidebar.astro';
 import PioneerCard from '../components/PioneerCard.astro';
@@ -64,14 +65,7 @@ import ExploreMethods from '../components/ExploreMethods.astro';
         <!-- Video -->
         <div class="mb-12">
           <div class="w-full aspect-video rounded-2xl overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/k4xbok7pRDE"
-              title="Sotai Natural Movement Therapy"
-              class="w-full h-full"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+            <YouTubeEmbed videoId="k4xbok7pRDE" title="Sotai Natural Movement Therapy" />
           </div>
         </div>
 

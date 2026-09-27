@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import Sidebar from '../components/Sidebar.astro';
 import towelStretchImage from '../assets/images/shared/towel-stretch-exercise.png';
 import towelImage from '../assets/towel-small.jpg';
@@ -64,14 +65,7 @@ import ExploreMethods from '../components/ExploreMethods.astro';
         <!-- YouTube Video -->
         <div class="my-10 rounded-2xl overflow-hidden shadow-xl ring-1 ring-gray-900/5">
           <div class="aspect-video w-full">
-            <iframe
-              class="w-full h-full border-0"
-              src="https://www.youtube.com/embed/Hs5Gi4r-7UM?si=IYY3kd2R_7664K2E"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
+            <YouTubeEmbed videoId="Hs5Gi4r-7UM" title="This Japanese 3-Minute Exercise Has Worked for 97 Years" />
           </div>
           <div class="p-5 bg-white border-t border-gray-100">
             <h3 class="font-bold text-xl text-text-main-light mb-1">This Japanese 3-Minute Exercise Has Worked for 97 Years</h3>

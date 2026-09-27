@@ -1,5 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Keep in sync with the contact page.
+const controllerName = 'Peter Andersson';
+const contactEmail = 'smartareshopping@gmail.com';
+
+const bullet = 'text-base text-text-muted-light flex items-start gap-2';
+const card = 'bg-white p-6 rounded-xl border border-gray-200';
 ---
 
 <BaseLayout
@@ -16,7 +23,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Privacy Policy & Disclaimer
       </h1>
       <p class="text-xl text-text-muted-light">
-        Last updated: May 2026
+        Last updated: September 2026
       </p>
     </section>
 
@@ -32,9 +39,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <ul class="space-y-2">
             <li><a class="text-accent-dark hover:underline" href="#medical-disclaimer">Medical Disclaimer</a></li>
             <li><a class="text-accent-dark hover:underline" href="#privacy-policy">Privacy Policy</a></li>
-            <li><a class="text-accent-dark hover:underline" href="#information-collection">Information We Collect</a></li>
-            <li><a class="text-accent-dark hover:underline" href="#cookies">Cookies & Tracking</a></li>
-            <li><a class="text-accent-dark hover:underline" href="#third-party">Third-Party Services</a></li>
+            <li><a class="text-accent-dark hover:underline" href="#controller">Who Is Responsible</a></li>
+            <li><a class="text-accent-dark hover:underline" href="#information-collection">What Data Is Processed</a></li>
+            <li><a class="text-accent-dark hover:underline" href="#cookies">Cookies</a></li>
+            <li><a class="text-accent-dark hover:underline" href="#third-party">Recipients & Transfers</a></li>
             <li><a class="text-accent-dark hover:underline" href="#your-rights">Your Rights</a></li>
             <li><a class="text-accent-dark hover:underline" href="#terms-of-use">Terms of Use</a></li>
             <li><a class="text-accent-dark hover:underline" href="#contact">Contact Information</a></li>
@@ -105,26 +113,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           Privacy Policy
         </h2>
         <p class="text-lg text-text-main-light leading-relaxed mb-4">
-          At Simple Senior Fitness, I respect your privacy and am committed to protecting any personal information you share with me. This privacy policy explains how I collect, use, and safeguard your information when you visit this website.
+          This site is built to collect as little personal data as possible. It sets no cookies, shows no ads, and uses no tracking that follows you across websites. This policy explains exactly what is processed, why, and what rights you have under the EU General Data Protection Regulation (GDPR).
+        </p>
+      </section>
+
+      <!-- Controller -->
+      <section id="controller">
+        <h3 class="font-bold text-2xl text-text-main-light mb-4">
+          Who Is Responsible for Your Data
+        </h3>
+        <p class="text-base text-text-muted-light leading-relaxed">
+          The data controller for this website is <strong>{controllerName}</strong>, a private individual based in Sweden. You can reach me at <a class="text-accent-dark hover:underline" href={`mailto:${contactEmail}`}>{contactEmail}</a>.
         </p>
       </section>
 
       <!-- Information Collection -->
       <section id="information-collection">
         <h3 class="font-bold text-2xl text-text-main-light mb-4">
-          Information I Collect
+          What Data Is Processed
         </h3>
         <div class="space-y-4">
-          <div class="bg-white p-6 rounded-xl border border-gray-200">
-            <h4 class="font-bold text-lg text-text-main-light mb-2">Automatically Collected Information</h4>
-            <p class="text-base text-text-muted-light">
-              When you visit this website, certain information may be automatically collected, including your IP address, browser type, operating system, referring URLs, and pages viewed. This information is used to analyze trends, administer the site, and improve user experience.
+          <div class={card}>
+            <h4 class="font-bold text-lg text-text-main-light mb-2">Server Logs</h4>
+            <p class="text-base text-text-muted-light mb-2">
+              When you visit the site, the web server automatically records your IP address, the date and time, the page requested, your browser type, and the referring page. This is technically necessary to deliver the site and to protect it against abuse and attacks.
+            </p>
+            <p class="text-sm text-text-muted-light">
+              <strong>Legal basis:</strong> legitimate interest in operating a secure website (Art. 6(1)(f) GDPR). <strong>Retention:</strong> logs are deleted automatically after 14 days.
             </p>
           </div>
-          <div class="bg-white p-6 rounded-xl border border-gray-200">
-            <h4 class="font-bold text-lg text-text-main-light mb-2">Information You Provide</h4>
+          <div class={card}>
+              <h4 class="font-bold text-lg text-text-main-light mb-2">Cookie-Free Visitor Statistics</h4>
+              <p class="text-base text-text-muted-light mb-2">
+                To understand which articles are useful, I count page views with Umami Cloud, a privacy-friendly analytics service. Its data is stored in the EU. It uses no cookies and does not store your IP address or build profiles. It only records aggregated, anonymous figures such as page views, referring sites, country, and device type. If your browser sends a "Do Not Track" signal, nothing is recorded.
+              </p>
+              <p class="text-sm text-text-muted-light">
+                <strong>Legal basis:</strong> legitimate interest in improving the site (Art. 6(1)(f) GDPR).
+              </p>
+            </div>
+          <div class={card}>
+            <h4 class="font-bold text-lg text-text-main-light mb-2">Embedded YouTube Videos</h4>
+            <p class="text-base text-text-muted-light mb-2">
+              Some articles contain videos hosted on YouTube. Until you press play, nothing is loaded from YouTube or Google and no data is sent to them. When you press play, the video loads from YouTube's privacy-enhanced domain (youtube-nocookie.com), and Google receives your IP address and browser information and may store data on your device. See <a class="text-accent-dark hover:underline" href="https://policies.google.com/privacy" rel="noopener" target="_blank">Google's privacy policy</a>.
+            </p>
+            <p class="text-sm text-text-muted-light">
+              <strong>Legal basis:</strong> your consent, given by pressing play (Art. 6(1)(a) GDPR). You can withdraw it at any time by not playing videos and clearing YouTube data in your browser.
+            </p>
+          </div>
+          <div class={card}>
+            <h4 class="font-bold text-lg text-text-main-light mb-2">When You Email Me</h4>
+            <p class="text-base text-text-muted-light mb-2">
+              If you email me, I receive your email address, your name if you include it, and whatever you write. I use it only to reply to you. It is never sold, shared, or used for marketing.
+            </p>
+            <p class="text-sm text-text-muted-light">
+              <strong>Legal basis:</strong> legitimate interest in answering your message (Art. 6(1)(f) GDPR). <strong>Retention:</strong> deleted once the conversation is finished, and no later than 12 months after the last message.
+            </p>
+          </div>
+          <div class={card}>
+            <h4 class="font-bold text-lg text-text-main-light mb-2">Fonts and Icons</h4>
             <p class="text-base text-text-muted-light">
-              If you contact me through email or a contact form, I will collect the information you provide, such as your name and email address. This information is used solely to respond to your inquiry and is never sold to third parties.
+              All fonts and icons are served from this website's own server. No requests are made to Google Fonts or other font services.
             </p>
           </div>
         </div>
@@ -133,51 +181,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Cookies -->
       <section id="cookies">
         <h3 class="font-bold text-2xl text-text-main-light mb-4">
-          Cookies & Tracking Technologies
+          Cookies
         </h3>
-        <p class="text-base text-text-muted-light leading-relaxed mb-4">
-          This website may use cookies and similar tracking technologies to enhance your browsing experience. Cookies are small files stored on your device that help me understand how visitors use the site.
-        </p>
-        <p class="text-base text-text-muted-light leading-relaxed mb-4">
-          <strong>Types of cookies used:</strong>
-        </p>
-        <ul class="space-y-2 ml-4 mb-4">
-          <li class="text-base text-text-muted-light flex items-start gap-2">
-            <span class="text-accent-dark">•</span>
-            <span><strong>Essential cookies:</strong> Required for the website to function properly</span>
-          </li>
-          <li class="text-base text-text-muted-light flex items-start gap-2">
-            <span class="text-accent-dark">•</span>
-            <span><strong>Analytics cookies:</strong> Help me understand how visitors interact with the site</span>
-          </li>
-          <li class="text-base text-text-muted-light flex items-start gap-2">
-            <span class="text-accent-dark">•</span>
-            <span><strong>Preference cookies:</strong> Remember your settings, such as dark mode preference</span>
-          </li>
-        </ul>
         <p class="text-base text-text-muted-light leading-relaxed">
-          You can control cookies through your browser settings. Note that disabling cookies may affect your experience on this site.
+          This website does not set any cookies and does not use similar tracking technologies. That is why there is no cookie banner. The only exception is YouTube, which may store data on your device after you choose to play a video (see above).
         </p>
       </section>
 
       <!-- Third-Party Services -->
       <section id="third-party">
         <h3 class="font-bold text-2xl text-text-main-light mb-4">
-          Third-Party Services
+          Recipients & International Transfers
         </h3>
-        <p class="text-base text-text-muted-light leading-relaxed mb-4">
-          This website may use third-party services that collect information used to identify you. These services have their own privacy policies, and I encourage you to review them:
-        </p>
-        <ul class="space-y-2 ml-4">
-          <li class="text-base text-text-muted-light flex items-start gap-2">
+        <ul class="space-y-2 ml-4 mb-4">
+          <li class={bullet}>
             <span class="text-accent-dark">•</span>
-            <span><strong>Google Analytics:</strong> For website traffic analysis</span>
+            <span><strong>Hetzner Online GmbH (Germany):</strong> hosts the website and its server logs as my data processor. Data stays in the EU.</span>
           </li>
-          <li class="text-base text-text-muted-light flex items-start gap-2">
+          <li class={bullet}>
             <span class="text-accent-dark">•</span>
-            <span><strong>Google Fonts:</strong> For typography</span>
+            <span><strong>Umami Software, Inc.:</strong> provides the cookie-free visitor statistics as my data processor. It receives only anonymous, aggregated usage data, stored in the EU.</span>
+          </li>
+          <li class={bullet}>
+            <span class="text-accent-dark">•</span>
+            <span><strong>Google (YouTube and Gmail):</strong> receives data only if you play a video or email me. Google may transfer data to the United States under the EU–US Data Privacy Framework.</span>
           </li>
         </ul>
+        <p class="text-base text-text-muted-light leading-relaxed">
+          I never sell your data and do not use it for automated decision-making or profiling.
+        </p>
       </section>
 
       <!-- Your Rights -->
@@ -186,24 +218,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           Your Rights
         </h3>
         <p class="text-base text-text-muted-light leading-relaxed mb-4">
-          Depending on your location, you may have the following rights regarding your personal data:
+          Under the GDPR you have the right to:
         </p>
         <div class="grid md:grid-cols-2 gap-4">
           <div class="bg-white p-4 rounded-lg border border-gray-200">
-            <p class="text-base text-text-muted-light"><strong>Access:</strong> Request a copy of your personal data</p>
+            <p class="text-base text-text-muted-light"><strong>Access:</strong> get a copy of the personal data I hold about you</p>
           </div>
           <div class="bg-white p-4 rounded-lg border border-gray-200">
-            <p class="text-base text-text-muted-light"><strong>Rectification:</strong> Request correction of inaccurate data</p>
+            <p class="text-base text-text-muted-light"><strong>Rectification:</strong> have inaccurate data corrected</p>
           </div>
           <div class="bg-white p-4 rounded-lg border border-gray-200">
-            <p class="text-base text-text-muted-light"><strong>Erasure:</strong> Request deletion of your personal data</p>
+            <p class="text-base text-text-muted-light"><strong>Erasure:</strong> have your data deleted</p>
           </div>
           <div class="bg-white p-4 rounded-lg border border-gray-200">
-            <p class="text-base text-text-muted-light"><strong>Objection:</strong> Object to processing of your data</p>
+            <p class="text-base text-text-muted-light"><strong>Restriction:</strong> limit how your data is used</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg border border-gray-200">
+            <p class="text-base text-text-muted-light"><strong>Objection:</strong> object to processing based on legitimate interest</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg border border-gray-200">
+            <p class="text-base text-text-muted-light"><strong>Portability:</strong> receive your data in a machine-readable format</p>
           </div>
         </div>
         <p class="text-base text-text-muted-light leading-relaxed mt-4">
-          To exercise any of these rights, please contact me using the information below.
+          To exercise any of these rights, email me and I will reply within one month. If you believe your data is being handled incorrectly, you can lodge a complaint with the Swedish Authority for Privacy Protection (<a class="text-accent-dark hover:underline" href="https://www.imy.se/en/" rel="noopener" target="_blank">IMY</a>) or the data protection authority in your own country.
         </p>
       </section>
 
@@ -268,10 +306,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </p>
         <div class="bg-white p-6 rounded-xl border border-gray-200">
           <p class="text-base text-text-main-light mb-2">
-            <strong>Simple Senior Fitness</strong>
+            <strong>Simple Senior Fitness</strong> – {controllerName}, Sweden
           </p>
           <p class="text-base text-text-muted-light">
-            Email: contact@simpleseniorfitness.com
+            Email: <a class="text-accent-dark hover:underline" href={`mailto:${contactEmail}`}>{contactEmail}</a>
           </p>
         </div>
       </section>
