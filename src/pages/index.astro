@@ -3,8 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import Sidebar from '../components/Sidebar.astro';
 import towelStretchImage from '../assets/images/shared/towel-stretch-exercise.png';
-import towelImage from '../assets/towel-small.jpg';
+import GuideCard from '../components/GuideCard.astro';
 import ExploreMethods from '../components/ExploreMethods.astro';
+import GuideCTA from '../components/GuideCTA.astro';
 ---
 
 <BaseLayout
@@ -109,30 +110,8 @@ import ExploreMethods from '../components/ExploreMethods.astro';
           <strong>How to perform:</strong> Hold the towel with both hands behind your back, gripping it shoulder-width apart. Slowly raise your arms while keeping them straight, allowing the towel to pull your shoulders back and open your chest. As you do this, gently drop your chin toward your chest. Hold for 20 seconds while breathing deeply.
         </p>
 
-        <!-- Mobile Product Card -->
-        <div class="lg:hidden my-8 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
-          <div class="h-1 bg-gradient-to-r from-accent-dark to-primary"></div>
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-bold text-accent-dark uppercase tracking-wider bg-emerald-50 px-2 py-1 rounded">Essential Tool</span>
-              <span class="material-symbols-outlined text-gray-400" style="font-size: 20px;">check_circle</span>
-            </div>
-            <div class="flex gap-4 mb-4">
-              <img src={towelImage.src} alt="Soft cotton household towel used for Japanese neck stretching exercises - the only equipment needed" class="size-20 rounded-lg object-cover bg-gray-100 shadow-md" />
-              <div>
-                <h4 class="text-lg font-bold text-text-main-light leading-tight">Your Household Towel</h4>
-                <p class="text-xs text-text-muted-light mt-1">No equipment needed</p>
-              </div>
-            </div>
-            <p class="text-sm text-text-muted-light mb-5 leading-relaxed">
-              You don't need expensive gym equipment. Learn how a simple towel can fix your posture.
-            </p>
-            <a href="#technique-1" class="flex items-center justify-center gap-2 bg-accent-dark hover:bg-emerald-800 text-white font-bold py-3 px-4 rounded-lg text-sm w-full transition-all shadow-md hover:shadow-lg">
-              See How It Works
-              <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
-          </div>
-        </div>
+        <!-- Mobile Guide Card (the sidebar version is hidden below lg) -->
+        <GuideCard placement="mobile-inline" class="lg:hidden my-8" />
 
         <!-- Technique 4 -->
         <h2 class="font-serif text-[1.5rem] font-medium lg:text-3xl lg:font-medium text-text-main-light pt-4" id="technique-4">
@@ -191,6 +170,8 @@ import ExploreMethods from '../components/ExploreMethods.astro';
         <p class="text-xl leading-relaxed text-text-main-light font-normal">
           Remember: the Japanese approach isn't about quick fixes. It's about building sustainable habits that support your body for the long term. Start with one or two techniques that feel good to you, and gradually build your routine from there. Your neck will thank you.
         </p>
+
+        <GuideCTA source="home" />
 
       </article>
 

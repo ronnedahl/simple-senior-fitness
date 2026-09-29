@@ -14,8 +14,7 @@
 //
 // Sticky also needs no scroll-container ancestor - see the `overflow-x-clip`
 // note in BaseLayout.astro.
-import { Image } from 'astro:assets';
-import guideCover from '../assets/images/shared/fukutsuji-guide-cover.webp';
+import GuideCard from './GuideCard.astro';
 
 interface TocItem {
   href: string;
@@ -28,49 +27,11 @@ interface Props {
 
 const { tocItems = [] } = Astro.props;
 
-// Page slug, sent to Umami and UTM so we can see which article the click came from.
-// Plain link only, no Gumroad script: the site must stay cookie-free.
-const source = Astro.url.pathname.replace(/^\/|\/$/g, '') || 'home';
-const guideUrl = `https://simpleseniorfitness.gumroad.com/l/fukutsuji-method?utm_source=site&utm_medium=sidebar&utm_campaign=${source}`;
 ---
 
 <aside class="hidden space-y-8 lg:col-span-4 lg:block">
 
-  <!-- Fukutsuji Guide Card (Gumroad) -->
-  <div class="bg-guide-paper border border-stone-200 rounded-xl shadow-lg overflow-hidden">
-    <div class="p-6">
-      <p class="text-sm font-bold uppercase tracking-widest text-guide-clay mb-4">
-        PDF guide for adults 50+
-      </p>
-      <div class="flex gap-4 mb-4">
-        <Image
-          src={guideCover}
-          alt="Cover of The Fukutsuji Method: A 14-Day Program, a PDF guide"
-          widths={[96, 192]}
-          sizes="96px"
-          class="size-24 shrink-0 rounded-lg object-cover shadow-md"
-        />
-        <div>
-          <h4 class="font-serif text-lg font-semibold text-guide-ink leading-tight">The Fukutsuji Method: A 14-Day Program</h4>
-          <p class="text-sm text-stone-600 mt-1">27 pages, instant download</p>
-        </div>
-      </div>
-      <p class="text-base text-stone-700 mb-5 leading-relaxed">
-        Five gentle minutes a day with one towel. A step-by-step plan with a printable tracker.
-      </p>
-      <a
-        href={guideUrl}
-        rel="noopener"
-        data-umami-event="gumroad-click"
-        data-umami-event-source={source}
-        data-umami-event-placement="sidebar"
-        class="flex items-center justify-center gap-2 rounded-full bg-guide-ink px-4 py-3 text-base font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
-      >
-        Get the guide for $12
-      </a>
-      <p class="text-sm text-stone-600 text-center mt-2">Secure checkout via Gumroad</p>
-    </div>
-  </div>
+  <GuideCard placement="sidebar" />
 
   <!-- Pioneer / Tradition Card (per-article) -->
   <slot name="pioneer" />
