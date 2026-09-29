@@ -16,6 +16,14 @@ export default {
         'text-muted-light': '#475569',
         'accent-dark': '#047857', // deep emerald brand accent (light theme)
         'accent-light': '#10b981',
+        // Gumroad guide buy box (GuideCTA.astro). Clay is darkened from #C8553D
+        // to reach WCAG AA contrast (5.6:1) for small text on the paper background.
+        guide: {
+          ink: '#2F4A6D',
+          'ink-hover': '#243A57',
+          clay: '#A8432E',
+          paper: '#FBF8F2',
+        },
       },
       fontFamily: {
         display: ['Atkinson Hyperlegible', 'sans-serif'],
