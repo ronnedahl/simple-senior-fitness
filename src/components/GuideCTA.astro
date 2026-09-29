@@ -1,0 +1,81 @@
+---
+/**
+ * GuideCTA: buy box for the Fukutsuji Method PDF (sold on Gumroad).
+ * Usage: <GuideCTA source="fukutsuji-method" />
+ * `source` is sent to Umami and UTM so we can see which page the click came from.
+ *
+ * Plain link only: never add Gumroad's embed script or overlay, the site must
+ * stay cookie-free (see the privacy policy).
+ */
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import guideCover from '../assets/images/shared/fukutsuji-guide-cover.webp';
+
+interface Props {
+  source: string;
+}
+
+const { source } = Astro.props;
+
+const url = `https://simpleseniorfitness.gumroad.com/l/fukutsuji-method?utm_source=site&utm_medium=cta&utm_campaign=${source}`;
+const titleId = `guide-cta-title-${source}`;
+
+const highlights = [
+  '27 pages, instant download',
+  'Morning and evening sessions, about 10 minutes a day',
+  'Safety check and bed option if the floor is hard for you',
+  '30-day money-back guarantee',
+];
+---
+
+<aside
+  class="my-12 rounded-2xl border border-stone-200 bg-guide-paper p-6 sm:p-8 shadow-sm"
+  aria-labelledby={titleId}
+>
+  <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
+    <Image
+      src={guideCover}
+      alt="Cover of The Fukutsuji Method: A 14-Day Program, a PDF guide"
+      widths={[160, 192, 320, 384]}
+      sizes="(min-width: 640px) 192px, 160px"
+      loading="lazy"
+      class="w-40 sm:w-48 h-auto shrink-0 rounded-xl shadow-md"
+    />
+
+    <div class="flex-1 text-center sm:text-left">
+      <p class="text-sm font-bold uppercase tracking-widest text-guide-clay mb-2">
+        PDF guide for adults 50+
+      </p>
+      <h2 id={titleId} class="font-serif text-2xl sm:text-3xl font-semibold text-guide-ink leading-tight mb-3">
+        Ready to make it a daily habit?
+      </h2>
+      <p class="text-lg text-stone-700 leading-relaxed mb-4">
+        <strong>The Fukutsuji Method: A 14-Day Program</strong> turns this article into a gentle,
+        day-by-day plan. Start with one minute and build up to five, with illustrated placements,
+        neck and shoulder stretches, and a printable tracker.
+      </p>
+
+      <ul class="text-base text-stone-700 space-y-2 mb-6 inline-block text-left">
+        {highlights.map((item) => (
+          <li class="flex items-start gap-2">
+            <Icon name="lucide:check" class="size-5 shrink-0 mt-0.5 text-guide-ink" aria-hidden="true" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+        <a
+          href={url}
+          rel="noopener"
+          data-umami-event="gumroad-click"
+          data-umami-event-source={source}
+          class="inline-block rounded-full bg-guide-ink px-7 py-3 text-lg font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
+        >
+          Get the guide for $12
+        </a>
+        <span class="text-sm text-stone-600">Secure checkout via Gumroad</span>
+      </div>
+    </div>
+  </div>
+</aside>
