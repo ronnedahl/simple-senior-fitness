@@ -64,13 +64,13 @@ const highlights = [
         ))}
       </ul>
 
-      <div class="flex flex-col sm:flex-row items-center gap-3">
+      <div class="flex flex-col sm:flex-row sm:flex-wrap items-center gap-x-4 gap-y-2">
         <a
           href={url}
           rel="noopener"
           data-umami-event="gumroad-click"
           data-umami-event-source={source}
-          class="inline-block rounded-full bg-guide-ink px-7 py-3 text-lg font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
+          class="inline-block whitespace-nowrap rounded-full bg-guide-ink px-7 py-3 text-lg font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
         >
           Get the guide for $12
         </a>

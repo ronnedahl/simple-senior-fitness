@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Drop cap for the first paragraph of an article. Uses ::first-letter so the
+   word stays whole in the HTML (screen readers and search engines read "If",
+   not "I f"). Sized to sit across the first two lines of text-xl copy. */
+.drop-cap::first-letter {
+  float: left;
+  font-family: theme('fontFamily.serif');
+  font-weight: 700;
+  color: theme('colors.accent-dark');
+  font-size: 3.6em;
+  line-height: 0.82;
+  margin: 0.06em 0.08em 0 0;
+}
