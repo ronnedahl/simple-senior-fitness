@@ -14,3 +14,72 @@
   line-height: 0.82;
   margin: 0.06em 0.08em 0 0;
 }
+
+/* ---------------------------------------------------------------------------
+   Article typography. One scale for all reading text inside <article
+   class="article-text">, so a page does not jump between fonts and sizes:
+
+     body text and lists ... 20px Atkinson, line-height 1.65
+     text inside a box ..... 18px (rounded containers with a background or
+                             border, FAQ items, and multi-column grids)
+     h3 .................... 22px Poppins semibold
+     h4 .................... 20px Atkinson bold (same size as the text it heads)
+     figcaption ............ 16px italic
+
+   These rules deliberately outrank Tailwind's size/font utilities (one extra
+   class of specificity), so a stray `text-sm` on a paragraph no longer changes
+   the reading size. Not affected: uppercase labels, big stat numbers
+   (text-2xl and up), anything in an <aside> (the Gumroad buy box), and
+   anything marked `.type-exempt`.
+   ------------------------------------------------------------------------- */
+/* Base size for loose text (spans and divs that are not p/li) so it inherits
+   the reading size instead of the 16px page default. */
+.article-text {
+  font-size: 1.25rem;
+  line-height: 1.65;
+}
+
+.article-text :is(:is(.rounded-lg, .rounded-xl, .rounded-2xl):is([class*="bg-"], [class*="border"]), details, .grid:is([class*="grid-cols-2"], [class*="grid-cols-3"], [class*="grid-cols-4"])) {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.article-text :is(p, li, summary, dd, dt, td, th):not(:where(aside, .type-exempt) *):not(.uppercase, [class*="text-2xl"], [class*="text-3xl"], [class*="text-4xl"], [class*="text-5xl"], [class*="text-6xl"]) {
+  font-family: theme('fontFamily.display');
+  font-size: 1.25rem;
+  line-height: 1.65;
+  font-style: normal;
+}
+
+/* Reading text is always the main text color. Grey (text-muted-light) mixed
+   with black made the pages look patchy and is harder to read for older
+   eyes. Colored callout text (red, green, amber...) is left alone. */
+.article-text :is(p, li, summary, dd, dt):is(.text-text-muted-light, .text-text-muted-light *):not(:where(aside, .type-exempt) *):not(.uppercase) {
+  color: theme('colors.text-main-light');
+}
+
+.article-text :is(:is(.rounded-lg, .rounded-xl, .rounded-2xl):is([class*="bg-"], [class*="border"]), details, .grid:is([class*="grid-cols-2"], [class*="grid-cols-3"], [class*="grid-cols-4"])) :is(p, li, summary, dd, dt, td, th):not(:where(aside, .type-exempt) *):not(.uppercase, [class*="text-2xl"], [class*="text-3xl"], [class*="text-4xl"], [class*="text-5xl"], [class*="text-6xl"]) {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.article-text h3:not(:where(aside, .type-exempt) *) {
+  font-family: theme('fontFamily.serif');
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.article-text h4:not(:where(aside, .type-exempt) *) {
+  font-family: theme('fontFamily.display');
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.article-text figcaption:not(:where(aside, .type-exempt) *) {
+  font-family: theme('fontFamily.display');
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.5;
+}
