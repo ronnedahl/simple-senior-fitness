@@ -83,3 +83,15 @@
   font-style: italic;
   line-height: 1.5;
 }
+
+/* -------------------------------------------------------------------------
+   Mobile: no decorative icons. Below lg the page is one narrow column and
+   icons beside headings, list items and links only add noise. Icons inside
+   the top bar <header> stay, and so does anything marked .keep-icon
+   (menu close, accordion chevrons, video play button).
+   ------------------------------------------------------------------------- */
+@media (max-width: 1023.98px) {
+  :is(.material-symbols-outlined, svg[data-icon], .deco-icon):not(header *, .keep-icon) {
+    display: none;
+  }
+}

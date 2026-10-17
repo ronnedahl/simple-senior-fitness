@@ -122,7 +122,7 @@ const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
       <button
         id="mobile-menu-close"
         aria-label="Close menu"
-        class="material-symbols-outlined text-text-main-light p-2 hover:bg-gray-100 rounded-full transition-colors"
+        class="keep-icon material-symbols-outlined text-text-main-light p-2 hover:bg-gray-100 rounded-full transition-colors"
         style="font-size: 24px;"
       >close</button>
     </div>
@@ -169,7 +169,7 @@ const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
               <summary class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-main-light hover:bg-gray-100 transition-colors cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                 <span class="material-symbols-outlined text-accent-dark" style="font-size: 22px;" aria-hidden="true">{category.icon}</span>
                 <span class="font-medium flex-1">{category.label}</span>
-                <span class="material-symbols-outlined text-text-muted-light transition-transform duration-200 group-open:rotate-180" style="font-size: 20px;" aria-hidden="true">expand_more</span>
+                <span class="keep-icon material-symbols-outlined text-text-muted-light transition-transform duration-200 group-open:rotate-180" style="font-size: 20px;" aria-hidden="true">expand_more</span>
               </summary>
               <ul class="mt-1 ml-4 pl-4 border-l border-gray-200 space-y-1">
                 {category.items.map((article) => (
