@@ -10,18 +10,18 @@ interface Props {
 const { videoId, title } = Astro.props;
 ---
 
-<youtube-embed data-video-id={videoId} data-title={title} class="relative block w-full h-full bg-gradient-to-br from-gray-800 to-gray-950 text-white">
+<youtube-embed data-video-id={videoId} data-title={title} class="type-exempt flex flex-col w-full h-full bg-gradient-to-br from-gray-800 to-gray-950 text-white">
   <button
     type="button"
-    class="group flex w-full h-full flex-col items-center justify-center gap-3 px-6 pb-10 text-center"
+    class="group flex w-full min-h-0 flex-1 flex-col items-center justify-center gap-3 px-6 pt-3 text-center"
     aria-label={`Play video: ${title}`}
   >
     <span class="flex size-16 items-center justify-center rounded-full bg-red-600 shadow-lg transition-transform group-hover:scale-110 lg:size-20">
-      <span class="material-symbols-outlined" style="font-size: 44px;" aria-hidden="true">play_arrow</span>
+      <span class="keep-icon material-symbols-outlined" style="font-size: 44px;" aria-hidden="true">play_arrow</span>
     </span>
-    <span class="font-bold text-base lg:text-lg">{title}</span>
+    <span class="hidden sm:block font-bold text-base lg:text-lg">{title}</span>
   </button>
-  <p class="absolute inset-x-0 bottom-0 px-6 pb-3 text-center text-xs text-gray-300 lg:text-sm">
+  <p class="shrink-0 px-6 pt-1 pb-3 text-center text-xs text-gray-300 lg:text-sm">
     Plays from YouTube. Pressing play sends data to Google.
     <a href="/privacy-policy#third-party" class="underline hover:text-white">Privacy policy</a>
   </p>
