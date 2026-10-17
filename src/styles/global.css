@@ -19,11 +19,12 @@
    Article typography. One scale for all reading text inside <article
    class="article-text">, so a page does not jump between fonts and sizes:
 
-     body text and lists ... 20px Atkinson, line-height 1.65
-     text inside a box ..... 18px (rounded containers with a background or
-                             border, FAQ items, and multi-column grids)
-     h3 .................... 22px Poppins semibold
-     h4 .................... 20px Atkinson bold (same size as the text it heads)
+     body text and lists ... 20px Atkinson, line-height 1.65 (18px on phones)
+     text inside a box ..... 18px (17px on phones; rounded containers with a
+                             background or border, FAQ items, and
+                             multi-column grids)
+     h3 .................... 22px Poppins semibold (18px on phones)
+     h4 .................... same size as body text, Atkinson bold
      figcaption ............ 16px italic
 
    These rules deliberately outrank Tailwind's size/font utilities (one extra
@@ -35,18 +36,49 @@
 /* Base size for loose text (spans and divs that are not p/li) so it inherits
    the reading size instead of the 16px page default. */
 .article-text {
-  font-size: 1.25rem;
+  --read-size: 1.25rem;
+  --box-size: 1.125rem;
+  --h3-size: 1.375rem;
+  font-size: var(--read-size);
   line-height: 1.65;
 }
 
+/* Phones: one step smaller. At 20px a 390px-wide screen fits only ~33
+   characters per line, so paragraphs turn into long thin columns. 18px still
+   sits well above the 16px default for older readers. */
+@media (max-width: 639.98px) {
+  .article-text {
+    --read-size: 1.125rem;
+    --box-size: 1.0625rem;
+    --h3-size: 1.125rem;
+  }
+}
+
+/* Phones: h1 24px, h2 19px. Tailwind's mobile sizes put h2 (24px) above
+   h1 (19px), so the page title looked less important than its sections.
+   Tight line-heights stop wrapped headings from drifting apart (h2 was
+   inheriting the 1.65 reading line-height). h3 steps down to 18px so it
+   stays below h2. */
+@media (max-width: 639.98px) {
+  #main-content h1 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  #main-content h2 {
+    font-size: 1.2rem;
+    line-height: 1.35;
+  }
+}
+
 .article-text :is(:is(.rounded-lg, .rounded-xl, .rounded-2xl):is([class*="bg-"], [class*="border"]), details, .grid:is([class*="grid-cols-2"], [class*="grid-cols-3"], [class*="grid-cols-4"])) {
-  font-size: 1.125rem;
+  font-size: var(--box-size);
   line-height: 1.6;
 }
 
 .article-text :is(p, li, summary, dd, dt, td, th):not(:where(aside, .type-exempt) *):not(.uppercase, [class*="text-2xl"], [class*="text-3xl"], [class*="text-4xl"], [class*="text-5xl"], [class*="text-6xl"]) {
   font-family: theme('fontFamily.display');
-  font-size: 1.25rem;
+  font-size: var(--read-size);
   line-height: 1.65;
   font-style: normal;
 }
@@ -59,20 +91,20 @@
 }
 
 .article-text :is(:is(.rounded-lg, .rounded-xl, .rounded-2xl):is([class*="bg-"], [class*="border"]), details, .grid:is([class*="grid-cols-2"], [class*="grid-cols-3"], [class*="grid-cols-4"])) :is(p, li, summary, dd, dt, td, th):not(:where(aside, .type-exempt) *):not(.uppercase, [class*="text-2xl"], [class*="text-3xl"], [class*="text-4xl"], [class*="text-5xl"], [class*="text-6xl"]) {
-  font-size: 1.125rem;
+  font-size: var(--box-size);
   line-height: 1.6;
 }
 
 .article-text h3:not(:where(aside, .type-exempt) *) {
   font-family: theme('fontFamily.serif');
-  font-size: 1.375rem;
+  font-size: var(--h3-size);
   font-weight: 600;
   line-height: 1.35;
 }
 
 .article-text h4:not(:where(aside, .type-exempt) *) {
   font-family: theme('fontFamily.display');
-  font-size: 1.25rem;
+  font-size: var(--read-size);
   font-weight: 700;
   line-height: 1.45;
 }
@@ -93,5 +125,14 @@
 @media (max-width: 1023.98px) {
   :is(.material-symbols-outlined, svg[data-icon], .deco-icon):not(header *, .keep-icon) {
     display: none;
+  }
+}
+
+/* Desktop: lighter h1/h2. At 30-36px Poppins 500 reads heavy; 400 keeps the
+   hierarchy through size alone. Phones keep 500, where the headings are
+   smaller. The id outranks Tailwind's font-medium/font-semibold. */
+@media (min-width: 1024px) {
+  #main-content :is(h1, h2) {
+    font-weight: 400;
   }
 }
