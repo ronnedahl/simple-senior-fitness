@@ -29,3 +29,6 @@ pnpm-debug.log*
 /*.md
 !CLAUDE.md
 !README.md
+
+# raw audio recordings (the site uses the compressed .mp3)
+src/assets/audio/*.wav

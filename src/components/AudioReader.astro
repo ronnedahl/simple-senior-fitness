@@ -1,0 +1,116 @@
+---
+// "Listen instead of reading" player for a section of an article. The audio
+// file is self-hosted, so nothing is sent to a third party, and it is only
+// downloaded when the visitor presses play (preload="none").
+interface Props {
+  src: string;
+  /** What the recording covers, used in the button's accessible label. */
+  label: string;
+  /** Shown before the audio has loaded, e.g. "1 min". */
+  duration: string;
+  /** Short id for the Umami event, e.g. "sotai-neck". */
+  track: string;
+}
+
+const { src, label, duration, track } = Astro.props;
+---
+
+<audio-reader class="type-exempt not-prose my-6 flex items-center gap-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+  <button
+    type="button"
+    class="flex size-14 shrink-0 items-center justify-center rounded-full bg-accent-dark text-white shadow-sm transition-colors hover:bg-emerald-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-dark/40 focus-visible:ring-offset-2"
+    aria-label={`Listen: ${label}`}
+    data-umami-event="audio-play"
+    data-umami-event-track={track}
+  >
+    <span class="keep-icon material-symbols-outlined" style="font-size: 36px;" aria-hidden="true" data-icon-state>play_arrow</span>
+  </button>
+
+  <div class="min-w-0 flex-1">
+    <p class="font-display text-base font-bold text-text-main-light leading-snug">
+      Prefer to listen? <span class="font-normal tabular-nums" data-status>Play the instructions ({duration})</span>
+    </p>
+    <div
+      class="mt-2 h-2 w-full cursor-pointer overflow-hidden rounded-full bg-emerald-200"
+      role="slider"
+      tabindex="0"
+      aria-label="Playback position"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      data-progress
+    >
+      <div class="h-full w-0 rounded-full bg-accent-dark" data-bar></div>
+    </div>
+  </div>
+
+  <audio preload="none" src={src}></audio>
+</audio-reader>
+
+<script>
+  const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+
+  class AudioReader extends HTMLElement {
+    connectedCallback() {
+      const audio = this.querySelector('audio')!;
+      const button = this.querySelector('button')!;
+      const icon = this.querySelector('[data-icon-state]')!;
+      const status = this.querySelector('[data-status]')!;
+      const progress = this.querySelector<HTMLElement>('[data-progress]')!;
+      const bar = this.querySelector<HTMLElement>('[data-bar]')!;
+      const label = button.getAttribute('aria-label')!.replace(/^Listen: /, '');
+
+      button.addEventListener('click', () => {
+        if (audio.paused) {
+          // Only one recording plays at a time
+          document.querySelectorAll('audio').forEach((a) => a !== audio && a.pause());
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      });
+
+      const sync = () => {
+        const playing = !audio.paused;
+        icon.textContent = playing ? 'pause' : 'play_arrow';
+        button.setAttribute('aria-label', `${playing ? 'Pause' : 'Listen'}: ${label}`);
+        // Count a play only once per page view
+        if (playing) button.removeAttribute('data-umami-event');
+      };
+      audio.addEventListener('play', sync);
+      audio.addEventListener('pause', sync);
+
+      audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        bar.style.width = `${pct}%`;
+        progress.setAttribute('aria-valuenow', String(Math.round(pct)));
+        status.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
+      });
+
+      audio.addEventListener('ended', () => {
+        audio.currentTime = 0;
+        bar.style.width = '0%';
+        status.textContent = 'Finished. Press play to hear it again';
+      });
+
+      const seekTo = (fraction: number) => {
+        if (!audio.duration) return;
+        audio.currentTime = Math.min(Math.max(fraction, 0), 1) * audio.duration;
+      };
+      progress.addEventListener('click', (e) => {
+        const r = progress.getBoundingClientRect();
+        seekTo((e.clientX - r.left) / r.width);
+      });
+      progress.addEventListener('keydown', (e) => {
+        if (!audio.duration) return;
+        if (e.key === 'ArrowRight') audio.currentTime = Math.min(audio.currentTime + 5, audio.duration);
+        else if (e.key === 'ArrowLeft') audio.currentTime = Math.max(audio.currentTime - 5, 0);
+        else return;
+        e.preventDefault();
+      });
+    }
+  }
+
+  customElements.define('audio-reader', AudioReader);
+</script>

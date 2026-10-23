@@ -50,7 +50,7 @@ server {
     gzip_types text/plain text/css text/xml text/javascript application/javascript application/xml+rss application/json image/svg+xml;
 
     # Cache static assets
-    location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2)$ {
+    location ~* \.(jpg|jpeg|png|gif|webp|avif|ico|css|js|svg|woff|woff2|mp3)$ {
         expires 1y;
         add_header Cache-Control "public, immutable";
     }

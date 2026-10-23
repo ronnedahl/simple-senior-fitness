@@ -15,6 +15,8 @@ import sotaiDailyRoutine from '../assets/images/sotai-natural-movement/sotai-dai
 import sotaiNervousSystem from '../assets/images/sotai-natural-movement/sotai-nervous-system-reset-senior-relaxed-back-view.webp';
 import ExploreMethods from '../components/ExploreMethods.astro';
 import GuideCTA from '../components/GuideCTA.astro';
+import AudioReader from '../components/AudioReader.astro';
+import sotaiNeckAudio from '../assets/audio/sotai-neck.mp3?url';
 ---
 
 <BaseLayout
@@ -258,6 +260,13 @@ import GuideCTA from '../components/GuideCTA.astro';
           </figure>
 
           <h3 class="font-bold text-text-main-light mb-4 text-lg">For Neck Pain and Stiffness</h3>
+
+          <AudioReader
+            src={sotaiNeckAudio}
+            label="Sotai exercises for neck pain and stiffness"
+            duration="1 min"
+            track="sotai-neck"
+          />
 
           <p class="font-semibold text-text-main-light mb-3">Side-to-Side Neck Rotation</p>
           <ol class="space-y-2 text-text-muted-light text-base mb-6">
