@@ -7,6 +7,41 @@ import doInImage from '../assets/images/do-in-self-massage/do-in-facial-massage-
 import heguPointImage from '../assets/images/do-in-self-massage/do-in-hand-acupressure-hegu-point.png';
 import ExploreMethods from '../components/ExploreMethods.astro';
 import GuideCTA from '../components/GuideCTA.astro';
+
+// One list feeds both the visible FAQ and the FAQPage structured data, so the
+// two can never drift apart.
+const faqs = [
+  {
+    q: 'What is do-in massage?',
+    a: 'Do-In is a traditional Japanese form of self-massage. You use your own fingertips, thumbs and palms to press, tap, knead and rub areas of your body, combined with slow breathing and gentle stretching. The name comes from the Chinese practice of Daoyin and means roughly "to guide and to stretch".',
+  },
+  {
+    q: 'How long should a do-in session take?',
+    a: 'Anything from a few minutes to about 15. A single point is held for 5 to 10 seconds and repeated 3 to 5 times, so even two or three points during a break count as practice. The full morning routine in this article takes about 15 minutes.',
+  },
+  {
+    q: 'Is do-in safe for seniors?',
+    a: 'For most people it is a gentle practice, as long as the pressure stays light: firm enough to feel, never painful. Use very light pressure if you have osteoporosis or varicose veins, stay away from broken skin and recent injuries, and ask your doctor first if you are pregnant or have a health condition.',
+  },
+  {
+    q: 'What is the difference between do-in and shiatsu?',
+    a: 'Both work with pressure on the same kinds of points. Shiatsu is given to you by a trained practitioner while you lie down. Do-In is done on yourself, so you can practise it anywhere, at any time, and you stay in control of the pressure.',
+  },
+  {
+    q: 'Can I do do-in every day?',
+    a: 'Yes. It is meant as a daily habit, and a few minutes each day is easier to keep up than one long session a week. Many people press a few points in the morning to wake up and a few in the evening to wind down.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 ---
 
 <BaseLayout
@@ -407,6 +442,10 @@ import GuideCTA from '../components/GuideCTA.astro';
           </div>
         </div>
 
+        <p class="text-xl leading-relaxed text-text-main-light font-normal">
+          Do-In pairs well with other gentle Japanese practices. If your lower back feels stiff from sitting, the <a href="/fukutsuji-method" class="text-accent-dark underline hover:no-underline">Japanese towel method (Fukutsuji)</a> lets gravity open up the spine while you lie still for a few minutes. And because every Do-In point is held while you breathe slowly, the <a href="/japanese-long-breath-method" class="text-accent-dark underline hover:no-underline">Japanese long breath method</a> is a natural companion to your practice.
+        </p>
+
         <!-- Safety Section -->
         <h2 class="font-serif text-[1.5rem] font-medium lg:text-3xl lg:font-medium text-text-main-light pt-4" id="safety">
           Safety Considerations and Contraindications
@@ -467,6 +506,22 @@ import GuideCTA from '../components/GuideCTA.astro';
           </div>
         </div>
 
+        <!-- FAQ -->
+        <h2 class="font-serif text-[1.5rem] font-medium lg:text-3xl lg:font-medium text-text-main-light pt-4" id="faq">
+          Frequently Asked Questions About Do-In
+        </h2>
+
+        <div class="space-y-6 my-6">
+          {faqs.map(({ q, a }) => (
+            <div>
+              <h3 class="font-bold text-lg text-text-main-light mb-2">{q}</h3>
+              <p class="text-xl text-text-main-light">{a}</p>
+            </div>
+          ))}
+        </div>
+
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
         <!-- Conclusion -->
         <h2 class="font-serif text-[1.5rem] font-medium lg:text-3xl lg:font-medium text-text-main-light pt-4" id="conclusion">
           Your Hands Hold Healing Power
@@ -511,6 +566,7 @@ import GuideCTA from '../components/GuideCTA.astro';
         { href: "#health-concerns", text: "Specific Health Issues" },
         { href: "#safety", text: "Safety Guidelines" },
         { href: "#science", text: "Scientific Research" },
+        { href: "#faq", text: "FAQ" },
       ]}>
         <TraditionCard
           slot="pioneer"
