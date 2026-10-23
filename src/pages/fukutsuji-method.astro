@@ -11,6 +11,43 @@ import gettingUpSafely from '../assets/images/fukutsuji-method/fukutsuji-method-
 import postureResults from '../assets/images/fukutsuji-method/fukutsuji-method-posture-results.webp';
 import ExploreMethods from '../components/ExploreMethods.astro';
 import GuideCTA from '../components/GuideCTA.astro';
+
+const faqs = [
+  {
+    q: 'What is the Fukutsuji method?',
+    a: 'It is a passive Japanese stretching technique where you lie on the floor with a rolled towel under your lower back and hold a set position for about five minutes. Its main aim is to support spinal alignment and improve posture.',
+  },
+  {
+    q: 'Who created the Fukutsuji method?',
+    a: 'Dr. Toshiki Fukutsuji, a Japanese reflexology and shiatsu specialist, developed it and popularized it through a bestselling book in Japan.',
+  },
+  {
+    q: 'Does the Fukutsuji method work for weight loss?',
+    a: 'No. It does not burn calories or fat. Any "slimmer" appearance comes from improved posture and reduced bloating, not from losing weight.',
+  },
+  {
+    q: 'How long should you hold the towel position?',
+    a: 'Up to five minutes once a day is typical. Beginners and anyone over 50 can start with one or two minutes and build up gradually.',
+  },
+  {
+    q: 'Is the Japanese towel method safe for seniors?',
+    a: 'For most healthy older adults it is gentle and low-risk because it involves no movement or strain. Anyone with a back condition, osteoporosis, or recent injury should check with a doctor first, and you should always get up slowly by rolling to your side.',
+  },
+  {
+    q: 'Can the Fukutsuji method help with back pain?',
+    a: 'Many people find it eases the lower-back tension that builds up from sitting. It is best seen as gentle daily maintenance rather than a treatment for serious or persistent pain, which needs proper medical attention.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 ---
 
 <BaseLayout
@@ -311,31 +348,15 @@ import GuideCTA from '../components/GuideCTA.astro';
         </h2>
 
         <div class="space-y-6 my-6">
-          <div>
-            <h3 class="font-bold text-lg text-text-main-light mb-2">What is the Fukutsuji method?</h3>
-            <p class="text-xl text-text-main-light">It is a passive Japanese stretching technique where you lie on the floor with a rolled towel under your lower back and hold a set position for about five minutes. Its main aim is to support spinal alignment and improve posture.</p>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg text-text-main-light mb-2">Who created the Fukutsuji method?</h3>
-            <p class="text-xl text-text-main-light">Dr. Toshiki Fukutsuji, a Japanese reflexology and shiatsu specialist, developed it and popularized it through a bestselling book in Japan.</p>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg text-text-main-light mb-2">Does the Fukutsuji method work for weight loss?</h3>
-            <p class="text-xl text-text-main-light">No. It does not burn calories or fat. Any "slimmer" appearance comes from improved posture and reduced bloating, not from losing weight.</p>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg text-text-main-light mb-2">How long should you hold the towel position?</h3>
-            <p class="text-xl text-text-main-light">Up to five minutes once a day is typical. Beginners and anyone over 50 can start with one or two minutes and build up gradually.</p>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg text-text-main-light mb-2">Is the Japanese towel method safe for seniors?</h3>
-            <p class="text-xl text-text-main-light">For most healthy older adults it is gentle and low-risk because it involves no movement or strain. Anyone with a back condition, osteoporosis, or recent injury should check with a doctor first, and you should always get up slowly by rolling to your side.</p>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg text-text-main-light mb-2">Can the Fukutsuji method help with back pain?</h3>
-            <p class="text-xl text-text-main-light">Many people find it eases the lower-back tension that builds up from sitting. It is best seen as gentle daily maintenance rather than a treatment for serious or persistent pain, which needs proper medical attention.</p>
-          </div>
+          {faqs.map(({ q, a }) => (
+            <div>
+              <h3 class="font-bold text-lg text-text-main-light mb-2">{q}</h3>
+              <p class="text-xl text-text-main-light">{a}</p>
+            </div>
+          ))}
         </div>
+
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
         <!-- Conclusion -->
         <div class="rounded-2xl p-8 my-8 text-center bg-emerald-50 border border-emerald-200">
