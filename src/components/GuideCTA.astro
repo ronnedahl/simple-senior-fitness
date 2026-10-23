@@ -1,8 +1,12 @@
 ---
 /**
  * GuideCTA: buy box for the Fukutsuji Method PDF (sold on Gumroad).
- * Usage: <GuideCTA source="fukutsuji-method" />
- * `source` is sent to Umami and UTM so we can see which page the click came from.
+ * Usage:
+ *   <GuideCTA source="fukutsuji-method" />                    full box, end of article
+ *   <GuideCTA source="fukutsuji-method" variant="compact" />  slim box, mid-article
+ * `source` (the page) and the variant are sent to Umami and UTM so we can see
+ * which page and which box the click came from. Link and price live in
+ * src/config/guide.ts.
  *
  * Plain link only: never add Gumroad's embed script or overlay, the site must
  * stay cookie-free (see the privacy policy).
@@ -10,15 +14,18 @@
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import guideCover from '../assets/images/shared/fukutsuji-guide-cover.webp';
+import { GUIDE_PRICE, GUIDE_TITLE, guideLink } from '../config/guide';
 
 interface Props {
   source: string;
+  variant?: 'full' | 'compact';
 }
 
-const { source } = Astro.props;
+const { source, variant = 'full' } = Astro.props;
+const compact = variant === 'compact';
 
-const url = `https://simpleseniorfitness.gumroad.com/l/fukutsuji-method?utm_source=site&utm_medium=cta&utm_campaign=${source}`;
-const titleId = `guide-cta-title-${source}`;
+const url = guideLink(compact ? 'cta-mid' : 'cta', source);
+const titleId = `guide-cta-title-${source}-${variant}`;
 
 const highlights = [
   '27 pages, instant download',
@@ -28,54 +35,92 @@ const highlights = [
 ];
 ---
 
-<aside
-  class="my-12 rounded-2xl border border-stone-200 bg-guide-paper p-6 sm:p-8 shadow-sm"
-  aria-labelledby={titleId}
->
-  <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
-    <Image
-      src={guideCover}
-      alt="Cover of The Fukutsuji Method: A 14-Day Program, a PDF guide"
-      widths={[160, 192, 320, 384]}
-      sizes="(min-width: 640px) 192px, 160px"
-      loading="lazy"
-      class="w-40 sm:w-48 h-auto shrink-0 rounded-xl shadow-md"
-    />
-
-    <div class="flex-1 text-center sm:text-left">
-      <p class="text-sm font-bold uppercase tracking-widest text-guide-clay mb-2">
-        PDF guide for adults 50+
-      </p>
-      <h2 id={titleId} class="font-serif text-2xl sm:text-3xl font-semibold text-guide-ink leading-tight mb-3">
-        Ready for a simple daily routine?
-      </h2>
-      <p class="text-lg text-stone-700 leading-relaxed mb-4">
-        <strong>The Fukutsuji Method: A 14-Day Program</strong> is a gentle, day-by-day plan built
-        around the Japanese towel method. Start with one minute and build up to five, with illustrated
-        placements, neck and shoulder stretches, and a printable tracker.
-      </p>
-
-      <ul class="text-base text-stone-700 space-y-2 mb-6 inline-block text-left">
-        {highlights.map((item) => (
-          <li class="flex items-start gap-2">
-            <Icon name="lucide:check" class="size-5 shrink-0 mt-0.5 text-guide-ink" aria-hidden="true" />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-
-      <div class="flex flex-col sm:flex-row sm:flex-wrap items-center gap-x-4 gap-y-2">
+{compact ? (
+  <aside
+    class="my-10 rounded-2xl border border-stone-200 bg-guide-paper p-5 sm:p-6 shadow-sm"
+    aria-labelledby={titleId}
+  >
+    <div class="flex flex-col sm:flex-row gap-5 items-center">
+      <Image
+        src={guideCover}
+        alt={`Cover of ${GUIDE_TITLE}, a PDF guide`}
+        widths={[112, 224]}
+        sizes="112px"
+        loading="lazy"
+        class="w-28 h-auto shrink-0 rounded-lg shadow-md"
+      />
+      <div class="flex-1 text-center sm:text-left">
+        <p id={titleId} class="font-serif text-xl font-semibold text-guide-ink leading-tight mb-2">
+          Want a day-by-day plan for this?
+        </p>
+        <p class="text-base text-stone-700 leading-relaxed mb-4">
+          <strong>{GUIDE_TITLE}</strong> walks you from one minute to five, with illustrated
+          towel placements and a printable tracker.
+        </p>
         <a
           href={url}
           rel="noopener"
           data-umami-event="gumroad-click"
           data-umami-event-source={source}
-          class="inline-block whitespace-nowrap rounded-full bg-guide-ink px-7 py-3 text-lg font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
+          data-umami-event-placement="cta-mid"
+          class="inline-block whitespace-nowrap rounded-full bg-guide-ink px-6 py-3 text-base font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
         >
-          Get the guide – now just $6
+          Get the guide – {GUIDE_PRICE}
         </a>
-        <span class="text-sm text-stone-600">Secure checkout via Gumroad</span>
       </div>
     </div>
-  </div>
-</aside>
+  </aside>
+) : (
+  <aside
+    class="my-12 rounded-2xl border border-stone-200 bg-guide-paper p-6 sm:p-8 shadow-sm"
+    aria-labelledby={titleId}
+  >
+    <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
+      <Image
+        src={guideCover}
+        alt={`Cover of ${GUIDE_TITLE}, a PDF guide`}
+        widths={[160, 192, 320, 384]}
+        sizes="(min-width: 640px) 192px, 160px"
+        loading="lazy"
+        class="w-40 sm:w-48 h-auto shrink-0 rounded-xl shadow-md"
+      />
+
+      <div class="flex-1 text-center sm:text-left">
+        <p class="text-sm font-bold uppercase tracking-widest text-guide-clay mb-2">
+          PDF guide for adults 50+
+        </p>
+        <h2 id={titleId} class="font-serif text-2xl sm:text-3xl font-semibold text-guide-ink leading-tight mb-3">
+          Ready for a simple daily routine?
+        </h2>
+        <p class="text-lg text-stone-700 leading-relaxed mb-4">
+          <strong>{GUIDE_TITLE}</strong> is a gentle, day-by-day plan built
+          around the Japanese towel method. Start with one minute and build up to five, with illustrated
+          placements, neck and shoulder stretches, and a printable tracker.
+        </p>
+
+        <ul class="text-base text-stone-700 space-y-2 mb-6 inline-block text-left">
+          {highlights.map((item) => (
+            <li class="flex items-start gap-2">
+              <Icon name="lucide:check" class="size-5 shrink-0 mt-0.5 text-guide-ink" aria-hidden="true" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="flex flex-col sm:flex-row sm:flex-wrap items-center gap-x-4 gap-y-2">
+          <a
+            href={url}
+            rel="noopener"
+            data-umami-event="gumroad-click"
+            data-umami-event-source={source}
+            data-umami-event-placement="cta"
+            class="inline-block whitespace-nowrap rounded-full bg-guide-ink px-7 py-3 text-lg font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
+          >
+            Get the guide – now just {GUIDE_PRICE}
+          </a>
+          <span class="text-sm text-stone-600">Secure checkout via Gumroad</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+)}
