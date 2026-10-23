@@ -29,3 +29,6 @@ pnpm-debug.log*
 /*.md
 !CLAUDE.md
 !README.md
+
+# local audio files (not tracked)
+src/assets/audio/

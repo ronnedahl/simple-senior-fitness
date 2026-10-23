@@ -1,0 +1,215 @@
+---
+// DRAFT, not published. Astro skips files in src/pages that start with "_",
+// so this page is not built and not in the sitemap. To publish: rename to
+// japanese-towel-method-mistakes.astro, remove robots="noindex, nofollow",
+// add datePublished/dateModified and a real date under the byline, and link
+// to it from related pages.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MedicalDisclaimer from '../components/MedicalDisclaimer.astro';
+import Sidebar from '../components/Sidebar.astro';
+import PioneerCard from '../components/PioneerCard.astro';
+import placementLowerBack from '../assets/images/fukutsuji-method/fukutsuji-towel-placement-lower-back.webp';
+import howToRoll from '../assets/images/fukutsuji-method/how-to-roll-towel-fukutsuji-method.webp';
+import gettingUpSafely from '../assets/images/fukutsuji-method/fukutsuji-method-getting-up-safely.webp';
+import ExploreMethods from '../components/ExploreMethods.astro';
+import GuideCTA from '../components/GuideCTA.astro';
+
+const link = 'text-accent-dark underline hover:no-underline';
+const h2 = 'font-serif text-[1.5rem] font-medium lg:text-3xl lg:font-medium text-text-main-light pt-4';
+const body = 'text-xl leading-relaxed text-text-main-light font-normal';
+
+const faqs = [
+  {
+    q: 'What is the most common mistake with the Japanese towel method?',
+    a: 'Doing too much too soon: a towel roll that is too thick and a full five minutes on the first day. Start with a thinner roll and one or two minutes, then build up over a few weeks.',
+  },
+  {
+    q: 'Where exactly should the towel go?',
+    a: 'Across your spine, not along it, under your lower back at about the level of your navel. A placement higher up, under the shoulder blades, is a separate variation aimed at rounded shoulders.',
+  },
+  {
+    q: 'Is it normal to feel some discomfort?',
+    a: 'A mild stretching sensation in the lower back or chest is normal. Sharp pain, numbness, tingling or dizziness that does not pass within a few seconds is not. If you feel any of these, stop and roll onto your side.',
+  },
+  {
+    q: 'Can I do the towel method on a bed?',
+    a: 'A firm floor with a mat works best, because a soft mattress lets the towel sink in. If getting down to the floor is difficult for you, a firm bed is a reasonable alternative.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+
+<BaseLayout
+  title="Japanese Towel Method Mistakes: 9 to Avoid (and Fixes)"
+  description="Doing the Japanese towel method but not feeling a difference? 9 common mistakes, from towel thickness to getting up too fast, and how seniors can fix them."
+  keywords="japanese towel method mistakes, fukutsuji method mistakes, japanese towel exercise, towel method how to, seniors"
+  canonicalUrl="https://simpleseniorfitness.com/japanese-towel-method-mistakes"
+  author="Simple Senior Fitness"
+  robots="noindex, nofollow"
+>
+  <main class="flex-1 w-full max-w-6xl mx-auto pb-12 px-6">
+    <section class="pt-10 pb-8 max-w-4xl">
+      <span class="inline-block py-1.5 px-3 rounded-full bg-emerald-100 text-accent-dark text-xs font-bold uppercase tracking-wider mb-4 border border-emerald-200">Japanese Towel Method</span>
+      <h1 class="font-serif text-[1.2rem] lg:text-[2rem] font-medium leading-tight text-text-main-light mb-6">
+        9 Japanese Towel Method Mistakes (and How to Fix Each One)
+      </h1>
+      <div class="flex items-center gap-4 border-l-4 border-accent-dark pl-4 py-1">
+        <div class="flex flex-col">
+          <span class="text-base font-semibold text-text-main-light">By Simple Senior Fitness</span>
+          <span class="text-sm text-text-muted-light">Draft</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="lg:grid lg:grid-cols-12 lg:gap-12">
+      <article class="article-text lg:col-span-8 space-y-8">
+
+        <p class={`drop-cap ${body}`}>
+          The Japanese towel method looks almost too simple to get wrong: roll up a towel, lie on it, breathe. Yet many people try it once or twice, feel uncomfortable or feel nothing at all, and give up. Often the cause is one of a handful of small, fixable mistakes. Here are nine common ones, and what to do instead.
+        </p>
+        <p class={body}>
+          If you are new to the method, start with our <a href="/fukutsuji-method" class={link}>complete guide to the Japanese towel method (Fukutsuji)</a>, then come back here to fine-tune your practice.
+        </p>
+
+        <h2 class={h2} id="too-thick">1. Starting with a towel roll that is too thick</h2>
+        <p class={body}>
+          A thick roll feels like it should work faster. In practice it pushes the lower back into a bigger arch than it is used to, and many people find it uncomfortable within a minute. The usual guideline is a roll of about 10 cm (4 inches) thick and 40 cm (16 inches) long, but if that feels like a lot, start thinner. Fold the towel once more before rolling, or use a hand towel, and work up over a few weeks.
+        </p>
+
+        <figure>
+          <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg">
+            <img src={howToRoll.src} alt="Hands rolling a bath towel into a firm cylinder and tying it" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <figcaption class="text-sm text-text-muted-light mt-3 italic text-center">
+            Roll the towel firmly and tie it so it keeps its shape.
+          </figcaption>
+        </figure>
+
+        <h2 class={h2} id="loose-roll">2. Using a loose roll that flattens out</h2>
+        <p class={body}>
+          A loosely rolled towel collapses under your body weight, and you end up lying on a flat lump. Roll it tightly and tie it with string or two elastic bands. It should feel firm when you press on it with your hand.
+        </p>
+
+        <h2 class={h2} id="wrong-placement">3. Placing the towel in the wrong spot</h2>
+        <p class={body}>
+          The towel goes <strong>across</strong> your spine, not along it, and sits under your lower back at about the level of your navel. Too low and it presses into the tailbone; too high and you are doing a different exercise. The higher placement, under the shoulder blades, is a separate variation for rounded shoulders, explained in our guide to the <a href="/japanese-towel-exercise-posture" class={link}>towel exercise for posture</a>.
+        </p>
+
+        <figure>
+          <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg">
+            <img src={placementLowerBack.src} alt="Rolled towel placed across the floor at the level of the lower back" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <figcaption class="text-sm text-text-muted-light mt-3 italic text-center">
+            Across the spine, at about navel height.
+          </figcaption>
+        </figure>
+
+        <h2 class={h2} id="soft-surface">4. Lying on a surface that is too soft</h2>
+        <p class={body}>
+          On a soft mattress or sofa the towel simply sinks in, and you lose most of the effect. A carpeted floor or a yoga mat is ideal. If getting down to the floor and back up is difficult for you, a firm bed is a reasonable compromise. It is better to practise on a bed than not at all.
+        </p>
+
+        <h2 class={h2} id="forcing-position">5. Forcing the arm and leg position</h2>
+        <p class={body}>
+          The classic position has your big toes touching with the heels apart, and your arms stretched overhead with the little fingers touching. If your shoulders do not let your arms rest on the floor overhead, do not force them. Let your arms rest wherever they are comfortable, even by your sides, and let the range improve over time. The position should feel like a gentle stretch, never a strain.
+        </p>
+
+        <h2 class={h2} id="too-long">6. Holding the position too long on day one</h2>
+        <p class={body}>
+          Five minutes is the goal, not the starting point. One or two minutes is plenty for the first week. Add a minute when the position feels easy, and you will reach five minutes without the soreness that makes people quit.
+        </p>
+
+        <GuideCTA source="japanese-towel-method-mistakes" variant="compact" />
+
+        <h2 class={h2} id="breathing">7. Holding your breath or tensing up</h2>
+        <p class={body}>
+          Many people brace their stomach and hold their breath as soon as they lie back, which works against the whole idea of a passive stretch. Breathe slowly through your nose and let your body grow heavy on each exhale. If it helps, count four seconds in and six seconds out. The <a href="/japanese-long-breath-method" class={link}>Japanese long breath method</a> is a good way to practise this kind of slow breathing.
+        </p>
+
+        <h2 class={h2} id="getting-up">8. Sitting straight up at the end</h2>
+        <p class={body}>
+          After several minutes with your back arched, jolting straight up puts a sudden load on the spine and can leave you lightheaded. Remove the towel, roll onto one side, rest for a breath or two, and then push yourself up to sitting with your arms.
+        </p>
+
+        <figure>
+          <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg">
+            <img src={gettingUpSafely.src} alt="Senior rolling onto one side to get up after the towel exercise" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <figcaption class="text-sm text-text-muted-light mt-3 italic text-center">
+            Roll to your side first, every time.
+          </figcaption>
+        </figure>
+
+        <h2 class={h2} id="expectations">9. Expecting a slimmer waist, or results overnight</h2>
+        <p class={body}>
+          Online videos often promise a flatter stomach in days. The towel method does not burn fat. What it can offer is a few minutes of gentle support for the lower back and chest, and over weeks of regular practice, many people notice they sit and stand a little taller. Practising for a few minutes most days does more than a long session once a week.
+        </p>
+
+        <h2 class={h2} id="checklist">A quick checklist before you lie down</h2>
+        <ul class="space-y-2 text-text-main-light">
+          <li>• A firm towel roll, tied, no thicker than feels comfortable</li>
+          <li>• A firm surface: floor with a mat, or a firm bed if the floor is hard for you</li>
+          <li>• The towel across your spine at navel height</li>
+          <li>• One to five minutes, depending on how long you have been practising</li>
+          <li>• Slow breathing through the nose</li>
+          <li>• Roll to your side before you sit up</li>
+        </ul>
+
+        <MedicalDisclaimer>
+          Check with your doctor before trying the towel method if you have a herniated disc, spinal stenosis, osteoporosis, a recent back injury or surgery, or any ongoing back condition. Avoid it during pregnancy. Stop immediately if anything hurts. This article is for general education and is not medical advice.
+        </MedicalDisclaimer>
+
+        <h2 class={h2} id="faq">Frequently asked questions</h2>
+        <div class="space-y-6 my-6">
+          {faqs.map(({ q, a }) => (
+            <div>
+              <h3 class="font-bold text-lg text-text-main-light mb-2">{q}</h3>
+              <p class="text-xl text-text-main-light">{a}</p>
+            </div>
+          ))}
+        </div>
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+        <p class={body}>
+          Get these few details right and the towel method becomes what it is meant to be: an easy, five-minute habit you can keep for years. For the full routine, including where the method comes from, see our <a href="/fukutsuji-method" class={link}>Fukutsuji method guide</a>, or the <a href="/towel-stretch-for-back" class={link}>towel stretch for back pain</a> for a lower-back focus.
+        </p>
+
+        <GuideCTA source="japanese-towel-method-mistakes" />
+      </article>
+
+      <Sidebar tocItems={[
+        { href: "#too-thick", text: "Roll Too Thick" },
+        { href: "#loose-roll", text: "Loose Roll" },
+        { href: "#wrong-placement", text: "Wrong Placement" },
+        { href: "#soft-surface", text: "Soft Surface" },
+        { href: "#forcing-position", text: "Forcing the Position" },
+        { href: "#too-long", text: "Too Long Too Soon" },
+        { href: "#breathing", text: "Holding Your Breath" },
+        { href: "#getting-up", text: "Getting Up Too Fast" },
+        { href: "#expectations", text: "Wrong Expectations" },
+        { href: "#faq", text: "FAQ" },
+      ]}>
+        <PioneerCard
+          slot="pioneer"
+          name="Dr. Toshiki Fukutsuji"
+          role="Japanese reflexology, shiatsu & acupressure specialist"
+          contribution="Developed the rolled-towel method after years of bodywork practice with clients who had back pain and poor posture. His book on the technique became a bestseller in Japan, selling several million copies."
+          iconName="lucide:scroll"
+          sourceUrl="https://www.penguin.co.uk/books/313569/the-5-second-stretch-by-fukutsuji-toshiki/9780241365809"
+          sourceLabel="Read his book"
+        />
+      </Sidebar>
+    </div>
+
+    <ExploreMethods />
+  </main>
+</BaseLayout>
