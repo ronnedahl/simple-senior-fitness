@@ -9,6 +9,8 @@ import seizaGettingIntoPosition from '../assets/images/seiza-sitting-benefits/se
 import seizaZafuModification from '../assets/images/seiza-sitting-benefits/seiza-zafu-cushion-modification.webp';
 import ExploreMethods from '../components/ExploreMethods.astro';
 import GuideCTA from '../components/GuideCTA.astro';
+import StepStrip from '../components/StepStrip.astro';
+import seizaSteps from '../assets/images/seiza-sitting-benefits/seiza-getting-into-position-steps.webp';
 ---
 
 <BaseLayout
@@ -341,6 +343,12 @@ import GuideCTA from '../components/GuideCTA.astro';
                 Enter Seiza slowly through kneeling, so your knees and ankles can adjust to the load.
               </figcaption>
             </figure>
+
+            <StepStrip
+              image={seizaSteps}
+              alt="Illustration of getting into Seiza in four steps: on hands and knees, kneeling upright with knees together, lowering onto the heels, and sitting tall in Seiza"
+              steps={['Start kneeling', 'Knees together', 'Sit back', 'Sit tall']}
+            />
 
             <div class="space-y-4">
               <div class="flex gap-4">

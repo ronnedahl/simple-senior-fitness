@@ -32,3 +32,6 @@ pnpm-debug.log*
 
 # local audio files (not tracked)
 src/assets/audio/
+
+# AI-generated images awaiting review (scripts/generate-images.mjs)
+generated-images/

@@ -7,6 +7,8 @@ import doInImage from '../assets/images/do-in-self-massage/do-in-facial-massage-
 import heguPointImage from '../assets/images/do-in-self-massage/do-in-hand-acupressure-hegu-point.png';
 import ExploreMethods from '../components/ExploreMethods.astro';
 import GuideCTA from '../components/GuideCTA.astro';
+import StepStrip from '../components/StepStrip.astro';
+import doInRoutineSteps from '../assets/images/do-in-self-massage/do-in-morning-routine-steps.webp';
 
 // One list feeds both the visible FAQ and the FAQPage structured data, so the
 // two can never drift apart.
@@ -343,6 +345,12 @@ const faqSchema = {
         <p class="text-xl leading-relaxed text-text-main-light font-normal">
           This 15-minute morning routine will energize your entire body and set a positive tone for the day.
         </p>
+
+        <StepStrip
+          image={doInRoutineSteps}
+          alt="Illustration of the five parts of the Do-In morning routine, seated on a chair: tapping the face, massaging the scalp, tapping along the arm, circling the belly, and pressing the sole of the foot"
+          steps={['Face', 'Head and neck', 'Arms and hands', 'Core', 'Legs and feet']}
+        />
 
         <div class="space-y-6 my-8">
           <div class="py-6 sm:p-6 rounded-xl">

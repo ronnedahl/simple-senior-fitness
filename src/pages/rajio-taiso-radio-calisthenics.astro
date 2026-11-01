@@ -6,6 +6,10 @@ import TraditionCard from '../components/TraditionCard.astro';
 import radioTaisoImage from '../assets/images/rajio-taiso-radio-calisthenics/radio-taiso-group-exercise.png';
 import ExploreMethods from '../components/ExploreMethods.astro';
 import GuideCTA from '../components/GuideCTA.astro';
+import StepStrip from '../components/StepStrip.astro';
+import radioSteps1 from '../assets/images/rajio-taiso-radio-calisthenics/radio-taiso-steps-1-4.webp';
+import radioSteps5 from '../assets/images/rajio-taiso-radio-calisthenics/radio-taiso-steps-5-8.webp';
+import radioSteps9 from '../assets/images/rajio-taiso-radio-calisthenics/radio-taiso-steps-9-13.webp';
 ---
 
 <BaseLayout
@@ -129,6 +133,12 @@ import GuideCTA from '../components/GuideCTA.astro';
           Radio Taiso No. 1 consists of 13 exercises performed in sequence. Each movement flows naturally into the next, creating a seamless 3-minute routine. Here's how to perform each exercise:
         </p>
 
+        <StepStrip
+          image={radioSteps1}
+          alt="Illustration of Radio Taiso exercises 1 to 4: arms raised overhead, arms swinging back, arms out to the sides making small circles, and knees bent with arms swung back"
+          steps={['Arm circles', 'Arm swings', 'Shoulder circles', 'Chest expansion with leg bends']}
+        />
+
         <!-- Exercise 1 -->
         <div class="rounded-xl py-6 sm:p-6 my-6">
           <h3 class="font-serif text-[1.5rem] font-medium lg:text-2xl lg:font-medium text-text-main-light mb-4" id="exercise-1">
@@ -192,6 +202,13 @@ import GuideCTA from '../components/GuideCTA.astro';
           <p class="text-sm text-accent-dark mt-2 italic">Modification: If balance is a concern, hold onto a chair with one hand while performing the movement.</p>
         </div>
 
+        <StepStrip
+          image={radioSteps5}
+          start={5}
+          alt="Illustration of Radio Taiso exercises 5 to 8: side bend with one arm overhead, forward bend, torso twist with hands on hips, and opposite arm and leg raise"
+          steps={['Side bends', 'Forward bend', 'Torso twists', 'Arm and leg raises']}
+        />
+
         <!-- Exercise 5 -->
         <div class="rounded-xl py-6 sm:p-6 my-6">
           <h3 class="font-serif text-[1.5rem] font-medium lg:text-2xl lg:font-medium text-text-main-light mb-4" id="exercise-5">
@@ -254,6 +271,13 @@ import GuideCTA from '../components/GuideCTA.astro';
           <p class="text-base text-text-muted-light"><strong>Benefits:</strong> Challenges balance and coordination while strengthening the core and leg muscles.</p>
           <p class="text-sm text-accent-dark mt-2 italic">Modification: Hold onto a chair if needed. Even small leg lifts provide benefits.</p>
         </div>
+
+        <StepStrip
+          image={radioSteps9}
+          start={9}
+          alt="Illustration of Radio Taiso exercises 9 to 13: leg swing holding a chair, rising onto the toes, side step with arms overhead, side step with arm swing, and deep breathing with arms raised"
+          steps={['Leg swings', 'Toe and heel raises', 'Step-out jumping jacks', 'Side steps with arm swings', 'Deep breathing']}
+        />
 
         <!-- Exercise 9 -->
         <div class="rounded-xl py-6 sm:p-6 my-6">

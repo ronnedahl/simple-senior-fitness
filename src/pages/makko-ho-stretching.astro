@@ -11,6 +11,8 @@ import backBendImage from '../assets/images/makko-ho-stretching/makko-ho-reclini
 import practiceImage from '../assets/images/makko-ho-stretching/makko-ho-cross-legged-stretch-seniors.webp';
 import ExploreMethods from '../components/ExploreMethods.astro';
 import GuideCTA from '../components/GuideCTA.astro';
+import StepStrip from '../components/StepStrip.astro';
+import makkoOverview from '../assets/images/makko-ho-stretching/makko-ho-four-poses-overview.webp';
 ---
 
 <BaseLayout
@@ -186,6 +188,13 @@ import GuideCTA from '../components/GuideCTA.astro';
         <p class="text-xl leading-relaxed text-text-main-light font-normal">
           Each Makko-Ho pose is held for 3-5 minutes, allowing for deep release in the muscles and fascia. The key is to relax into the stretch rather than forcing it. You should feel a gentle pull, never pain.
         </p>
+
+        <StepStrip
+          image={makkoOverview}
+          alt="Illustration of the four Makko-Ho poses: seated forward fold, wide-leg straddle stretch, cross-legged side stretch, and kneeling back bend"
+          steps={['Seated forward fold', 'Straddle stretch', 'Cross-legged side stretch', 'Kneeling back bend']}
+          badgesAboveOnMobile
+        />
 
         <!-- Pose 1 -->
         <div class="rounded-2xl py-8 sm:p-8 my-8">
