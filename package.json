@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "deploy": "bash deploy.sh",
     "indexnow": "node scripts/indexnow-ping.mjs",
+    "images": "node scripts/generate-images.mjs",
     "astro": "astro"
   },
   "dependencies": {
