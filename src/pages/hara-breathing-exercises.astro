@@ -248,6 +248,40 @@ import GuideCTA from '../components/GuideCTA.astro';
             </div>
           </div>
 
+          <!-- Breath cycle diagram: the circle is the belly, shrinking on the exhale and growing on the inhale -->
+          <figure class="my-8">
+            <ol class="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 list-none p-0 m-0">
+              {[
+                { label: 'Exhale', note: 'Belly sinks toward the spine', r: 18, arrows: 'in' },
+                { label: 'Pause', note: 'A moment of stillness', r: 18, arrows: 'none' },
+                { label: 'Inhale', note: 'Belly expands like a balloon', r: 30, arrows: 'out' },
+                { label: 'Pause', note: 'Briefly, then exhale again', r: 30, arrows: 'none' },
+              ].map((step, i) => (
+                <li class="flex flex-col items-center text-center">
+                  <svg viewBox="0 0 96 96" class="w-24 h-24" aria-hidden="true">
+                    <circle cx="48" cy="48" r="40" fill="none" stroke="#d1d5db" stroke-dasharray="3 4" />
+                    <circle cx="48" cy="48" r={step.r} fill="#047857" fill-opacity="0.15" stroke="#047857" stroke-width="2.5" />
+                    {step.arrows !== 'none' && [0, 90, 180, 270].map((deg) => (
+                      <g transform={`rotate(${deg} 48 48)`}>
+                        {step.arrows === 'in'
+                          ? <path d="M48 6 V18 M43 13 L48 18 L53 13" fill="none" stroke="#047857" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                          : <path d="M48 16 V6 M43 11 L48 6 L53 11" fill="none" stroke="#047857" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />}
+                      </g>
+                    ))}
+                  </svg>
+                  <span class="mt-2 inline-flex items-center gap-2 font-bold text-text-main-light">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-accent-dark text-white text-sm">{i + 1}</span>
+                    {step.label}
+                  </span>
+                  <span class="mt-1 text-base text-text-muted-light leading-snug">{step.note}</span>
+                </li>
+              ))}
+            </ol>
+            <figcaption class="mt-4 text-center text-base text-text-muted-light">
+              One breath cycle, all through the nose. Repeat for 5–10 minutes.
+            </figcaption>
+          </figure>
+
           <div class="mt-6 py-4 sm:p-4 rounded-lg">
             <h4 class="font-bold text-text-main-light mb-2">Key Points:</h4>
             <ul class="space-y-1 text-sm text-text-main-light">

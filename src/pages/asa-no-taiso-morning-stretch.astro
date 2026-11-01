@@ -5,6 +5,11 @@ import TraditionCard from '../components/TraditionCard.astro';
 import morningStretchImage from '../assets/images/asa-no-taiso-morning-stretch/morning-stretch-routine.png';
 import ExploreMethods from '../components/ExploreMethods.astro';
 import GuideCTA from '../components/GuideCTA.astro';
+import StepStrip from '../components/StepStrip.astro';
+import asaPhase1 from '../assets/images/asa-no-taiso-morning-stretch/asa-no-taiso-phase-1.webp';
+import asaPhase2 from '../assets/images/asa-no-taiso-morning-stretch/asa-no-taiso-phase-2.webp';
+import asaPhase3 from '../assets/images/asa-no-taiso-morning-stretch/asa-no-taiso-phase-3.webp';
+import asaPhase45 from '../assets/images/asa-no-taiso-morning-stretch/asa-no-taiso-phase-4-5.webp';
 ---
 
 <BaseLayout
@@ -130,6 +135,12 @@ import GuideCTA from '../components/GuideCTA.astro';
           <h3 class="font-bold text-xl text-text-main-light mb-4">Phase 1: Awakening (2 minutes) - Standing</h3>
           <p class="text-text-muted-light mb-4"><em>Purpose: Transition from sleep state to movement state, establish breath rhythm, center awareness</em></p>
 
+          <StepStrip
+            image={asaPhase1}
+            alt="Illustration of Asa no Taiso phase 1: palms pressed together at the chest, shoulder circles, and a gentle neck tilt"
+            steps={['Palm press (Gassho)', 'Shoulder circles', 'Neck awakening']}
+          />
+
           <div class="space-y-4">
             <div>
               <h4 class="font-bold text-text-main-light">1. Gasshō (合掌) - Palm Press with Breath Awareness</h4>
@@ -169,6 +180,13 @@ import GuideCTA from '../components/GuideCTA.astro';
         <div class="rounded-xl py-6 sm:p-6 my-6">
           <h3 class="font-bold text-xl text-text-main-light mb-4">Phase 2: Spinal Mobility (3 minutes) - Standing</h3>
           <p class="text-text-muted-light mb-4"><em>Purpose: Restore full spinal range of motion after night's compression</em></p>
+
+          <StepStrip
+            image={asaPhase2}
+            start={4}
+            alt="Illustration of Asa no Taiso phase 2: reaching up onto the toes, side bend, spinal rotation with arms forward, and forward fold"
+            steps={['Sky reach', 'Side bends', 'Spinal rotation', 'Forward fold']}
+          />
 
           <div class="space-y-4">
             <div>
@@ -219,6 +237,13 @@ import GuideCTA from '../components/GuideCTA.astro';
           <h3 class="font-bold text-xl text-text-main-light mb-4">Phase 3: Lower Body Activation (3 minutes)</h3>
           <p class="text-text-muted-light mb-4"><em>Purpose: Improve leg circulation, strengthen stabilizers, enhance balance</em></p>
 
+          <StepStrip
+            image={asaPhase3}
+            start={8}
+            alt="Illustration of Asa no Taiso phase 3 holding a chair: knee lift, heel raise, and ankle circles"
+            steps={['Leg awakening', 'Heel raises', 'Ankle circles']}
+          />
+
           <div class="space-y-4">
             <div>
               <h4 class="font-bold text-text-main-light">8. Ashi no Katsuyaku (足の活躍) - Leg Awakening Series</h4>
@@ -254,6 +279,13 @@ import GuideCTA from '../components/GuideCTA.astro';
         <div class="rounded-xl py-6 sm:p-6 my-6">
           <h3 class="font-bold text-xl text-text-main-light mb-4">Phase 4: Hip Opening (2 minutes)</h3>
           <p class="text-text-muted-light mb-4"><em>Purpose: Restore hip mobility critical for walking, stairs, and preventing falls</em></p>
+
+          <StepStrip
+            image={asaPhase45}
+            start={11}
+            alt="Illustration of Asa no Taiso phases 4 and 5: hip flexor stretch at a chair, leg swing, whole-body shake, and gratitude breathing with hands on the heart"
+            steps={['Hip flexor stretch', 'Leg swings', 'Whole-body shake', 'Gratitude breathing']}
+          />
 
           <div class="space-y-4">
             <div>
