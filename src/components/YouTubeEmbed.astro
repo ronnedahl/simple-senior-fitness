@@ -1,27 +1,48 @@
 ---
 // Click-to-load YouTube player. Nothing is requested from YouTube or Google
-// (not even the thumbnail) until the visitor presses play, so no cookies or
-// IP addresses reach them without the visitor's action (GDPR/ePrivacy).
+// until the visitor presses play, so no cookies or IP addresses reach them
+// without the visitor's action (GDPR/ePrivacy). The thumbnail is a local copy
+// in src/assets/images/shared/youtube/<videoId>.webp (fetched once with
+// `npm run yt-thumbs`) and is served from our own server.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   videoId: string;
   title: string;
 }
 
 const { videoId, title } = Astro.props;
+
+const thumbnails = import.meta.glob<{ default: ImageMetadata }>('../assets/images/shared/youtube/*.webp', { eager: true });
+const thumbnail = thumbnails[`../assets/images/shared/youtube/${videoId}.webp`]?.default;
 ---
 
-<youtube-embed data-video-id={videoId} data-title={title} class="type-exempt flex flex-col w-full h-full bg-gradient-to-br from-gray-800 to-gray-950 text-white">
+<youtube-embed data-video-id={videoId} data-title={title} class="type-exempt relative flex flex-col w-full h-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-950 text-white">
+  {thumbnail && (
+    <>
+      <Image
+        src={thumbnail}
+        alt=""
+        widths={[480, 768, 1280]}
+        sizes="(min-width: 1024px) 720px, 100vw"
+        loading="lazy"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <span class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/70" aria-hidden="true"></span>
+    </>
+  )}
   <button
     type="button"
-    class="group flex w-full min-h-0 flex-1 flex-col items-center justify-center gap-3 px-6 pt-3 text-center"
+    class="group relative flex w-full min-h-0 flex-1 flex-col items-center justify-center gap-3 px-6 pt-3 text-center"
     aria-label={`Play video: ${title}`}
   >
     <span class="flex size-16 items-center justify-center rounded-full bg-red-600 shadow-lg transition-transform group-hover:scale-110 lg:size-20">
       <span class="keep-icon material-symbols-outlined" style="font-size: 44px;" aria-hidden="true">play_arrow</span>
     </span>
-    <span class="hidden sm:block font-bold text-base lg:text-lg">{title}</span>
+    {!thumbnail && <span class="hidden sm:block font-bold text-base lg:text-lg">{title}</span>}
   </button>
-  <p class="shrink-0 px-6 pt-1 pb-3 text-center text-xs text-gray-300 lg:text-sm">
+  <p class="relative shrink-0 px-6 pt-1 pb-3 text-center text-xs text-gray-100 lg:text-sm [text-shadow:0_1px_2px_rgb(0_0_0/0.8)]">
     Plays from YouTube. Pressing play sends data to Google.
     <a href="/privacy-policy#third-party" class="underline hover:text-white">Privacy policy</a>
   </p>

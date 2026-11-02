@@ -10,6 +10,7 @@
     "deploy": "bash deploy.sh",
     "indexnow": "node scripts/indexnow-ping.mjs",
     "images": "node scripts/generate-images.mjs",
+    "yt-thumbs": "node scripts/fetch-youtube-thumbnails.mjs",
     "astro": "astro"
   },
   "dependencies": {
