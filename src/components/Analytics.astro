@@ -1,0 +1,46 @@
+---
+/**
+ * Google Analytics 4 with Consent Mode v2. Must sit in <head> before any other
+ * Google script. Umami keeps running next to it, untouched.
+ *
+ * - EU/EEA, UK, CH: analytics_storage is denied until the visitor accepts in the
+ *   cookie banner. Google decides the region server-side, so this is what legally
+ *   controls cookies, even if the banner's time-zone guess is wrong.
+ * - Rest of the world: analytics_storage granted at once, no banner.
+ * - Ad signals are denied for everyone. When Mediavine is added, its own CMP
+ *   replaces this banner.
+ */
+import { GA_MEASUREMENT_ID, CONSENT_KEY } from '../config/analytics';
+---
+
+<script is:inline define:vars={{ gaId: GA_MEASUREMENT_ID, consentKey: CONSENT_KEY }}>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  var gtag = window.gtag;
+
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500,
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']
+  });
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'granted'
+  });
+
+  try {
+    var saved = localStorage.getItem(consentKey);
+    if (saved === 'granted' || saved === 'denied') {
+      gtag('consent', 'update', { analytics_storage: saved });
+    }
+  } catch (e) {}
+
+  gtag('js', new Date());
+  gtag('config', gaId);
+</script>
+<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>

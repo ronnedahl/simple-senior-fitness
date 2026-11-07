@@ -1,0 +1,91 @@
+---
+/**
+ * Cookie banner for Google Analytics, shown only to visitors whose browser time
+ * zone is in Europe and who have not chosen yet. A wrong guess is safe: GA's
+ * Consent Mode region default (Analytics.astro) still denies cookies in Europe.
+ * "Decline" and "Accept" are equally large and visible (GDPR).
+ *
+ * Any element with [data-cookie-settings] (the footer link) clears the choice
+ * and shows the banner again, for every visitor.
+ */
+import { CONSENT_KEY } from '../config/analytics';
+---
+
+<section
+  id="cookie-banner"
+  hidden
+  aria-labelledby="cookie-banner-title"
+  class="type-exempt fixed inset-x-0 bottom-0 z-[80] sm:bottom-4 sm:mx-auto sm:max-w-[640px] sm:px-4 lg:left-6 lg:right-auto lg:mx-0 lg:w-[640px] lg:px-0"
+>
+  <div class="border-t-2 border-gray-300 bg-white px-5 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-[0_-8px_30px_rgba(0,0,0,0.18)] sm:rounded-2xl sm:border-2 sm:pb-5">
+    <h2 id="cookie-banner-title" class="text-lg font-bold text-gray-900">Cookies</h2>
+    <p class="mt-2 text-base leading-relaxed text-gray-900 sm:text-lg">
+      We use Google Analytics to understand which articles are helpful. No ads, no tracking across other sites. Is that okay?
+      <a href="/privacy-policy#cookies" class="font-semibold text-accent-dark underline underline-offset-2">Privacy policy</a>
+    </p>
+    <div class="mt-4 grid grid-cols-2 gap-3">
+      <button type="button" data-consent="denied" class="min-h-[52px] rounded-xl border-2 border-gray-900 bg-white px-4 text-lg font-bold text-gray-900 hover:bg-gray-100 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-accent-dark">
+        Decline
+      </button>
+      <button type="button" data-consent="granted" class="min-h-[52px] rounded-xl border-2 border-gray-900 bg-gray-900 px-4 text-lg font-bold text-white hover:bg-gray-700 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-accent-dark">
+        Accept
+      </button>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ consentKey: CONSENT_KEY }}>
+  var banner = document.getElementById('cookie-banner');
+
+  function saved() {
+    try { return localStorage.getItem(consentKey); } catch (e) { return null; }
+  }
+
+  // Keep the end of the page (footer, last buy box) reachable above the banner.
+  // Padding at the very bottom moves nothing that is on screen, so no layout shift.
+  function show() {
+    banner.hidden = false;
+    document.body.style.paddingBottom = banner.offsetHeight + 'px';
+  }
+  function hide() {
+    banner.hidden = true;
+    document.body.style.paddingBottom = '';
+  }
+
+  // Remove GA cookies already set (a visitor who accepted earlier, then declines).
+  function clearGaCookies() {
+    var host = location.hostname.replace(/^www\./, '');
+    document.cookie.split(';').forEach(function (c) {
+      var name = c.split('=')[0].trim();
+      if (name.indexOf('_ga') !== 0) return;
+      ['', '; domain=' + host, '; domain=.' + host].forEach(function (d) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + d;
+      });
+    });
+  }
+
+  banner.querySelectorAll('[data-consent]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var choice = btn.getAttribute('data-consent');
+      try { localStorage.setItem(consentKey, choice); } catch (e) {}
+      if (window.gtag) window.gtag('consent', 'update', { analytics_storage: choice });
+      if (choice === 'denied') clearGaCookies();
+      hide();
+    });
+  });
+
+  document.querySelectorAll('[data-cookie-settings]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      try { localStorage.removeItem(consentKey); } catch (e2) {}
+      show();
+      banner.querySelector('[data-consent="granted"]').focus();
+    });
+  });
+
+  var tz = '';
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+  var isEurope = tz.indexOf('Europe/') === 0 || ['Atlantic/Reykjavik', 'Atlantic/Canary', 'Atlantic/Madeira', 'Atlantic/Azores', 'Atlantic/Faroe'].indexOf(tz) !== -1;
+  var choice = saved();
+  if (isEurope && choice !== 'granted' && choice !== 'denied') show();
+</script>
