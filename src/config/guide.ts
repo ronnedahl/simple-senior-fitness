@@ -3,6 +3,8 @@
 export const GUIDE_URL = 'https://simpleseniorfitness.gumroad.com/l/fukutsuji-method';
 export const GUIDE_PRICE = '$6';
 export const GUIDE_TITLE = 'The Fukutsuji Method: A 14-Day Program';
+/** Short product name sent to Umami with every `gumroad-click` event. */
+export const GUIDE_PRODUCT = 'fukutsuji-14-day';
 
 /** Gumroad link with UTM tags, so Gumroad shows which page and box sold. */
 export const guideLink = (medium: string, campaign: string) =>
