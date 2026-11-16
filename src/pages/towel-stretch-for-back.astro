@@ -371,7 +371,14 @@ import GuideCTA from '../components/GuideCTA.astro';
 
       </article>
 
-      <Sidebar>
+      <Sidebar tocItems={[
+        { href: "#why-japanese-methods", text: "Why Japanese Methods Differ" },
+        { href: "#understanding-method", text: "Understanding the Method" },
+        { href: "#how-to-perform", text: "How to Do the Stretch" },
+        { href: "#benefits", text: "Benefits for Seniors" },
+        { href: "#common-mistakes", text: "Common Mistakes" },
+        { href: "#faq", text: "FAQ" },
+      ]}>
         <PioneerCard
           slot="pioneer"
           name="Dr. Toshiki Fukutsuji"

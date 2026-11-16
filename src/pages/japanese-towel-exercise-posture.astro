@@ -363,7 +363,20 @@ import GuideCTA from '../components/GuideCTA.astro';
 
       </article>
 
-      <Sidebar>
+      <Sidebar tocItems={[
+        { href: "#what-it-is", text: "What It Is" },
+        { href: "#why-posture-rounds", text: "Why Posture Rounds" },
+        { href: "#towel-placement", text: "Towel Placement" },
+        { href: "#benefits", text: "Benefits" },
+        { href: "#what-you-need", text: "What You Need" },
+        { href: "#how-to-roll", text: "How to Roll the Towel" },
+        { href: "#step-by-step", text: "Step by Step" },
+        { href: "#daily-routine", text: "Daily Routine" },
+        { href: "#safety", text: "Safety" },
+        { href: "#common-mistakes", text: "Common Mistakes" },
+        { href: "#combine", text: "Combine With Other Practices" },
+        { href: "#faq", text: "FAQ" },
+      ]}>
         <PioneerCard
           slot="pioneer"
           name="Dr. Toshiki Fukutsuji"
