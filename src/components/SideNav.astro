@@ -1,0 +1,67 @@
+---
+/**
+ * SideNav: left-hand practice navigation on article pages, desktop only (1400px and
+ * up). Lists every article grouped by category, marks the current one, and stays
+ * in view while the reader scrolls. Generated from src/data/articles.ts, like
+ * the header menu, so new articles show up here automatically.
+ *
+ * Rendered by BaseLayout next to the page content; pages do not include it.
+ * The column stretches to the full page height (default flex `align-items`),
+ * which is the track the sticky inner block runs along.
+ */
+import { articles, CATEGORIES } from '../data/articles';
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const groups = CATEGORIES.map((category) => ({
+  ...category,
+  items: articles.filter((article) => article.category === category.id),
+})).filter((group) => group.items.length > 0);
+---
+
+<aside class="type-exempt hidden min-[1400px]:block w-64 shrink-0 border-r border-slate-200 px-5 pt-8 pb-8">
+  <nav
+    aria-label="Practices"
+    class="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto"
+  >
+    <p class="px-3 mb-3 text-sm font-bold uppercase tracking-widest text-text-muted-light">All practices</p>
+
+    {groups.map((group) => (
+      <div class="mb-3">
+        <h2 class="flex items-center gap-2 px-3 mb-1 text-sm font-bold text-text-main-light">
+          <span class="keep-icon material-symbols-outlined text-accent-dark" style="font-size: 20px;" aria-hidden="true">{group.icon}</span>
+          {group.label}
+        </h2>
+        <ul>
+          {group.items.map((article) => {
+            const current = article.url === currentPath;
+            return (
+              <li>
+                <a
+                  href={article.url}
+                  aria-current={current ? 'page' : undefined}
+                  class:list={[
+                    'block rounded-lg border-l-4 px-3 py-1 text-[0.95rem] leading-snug transition-colors',
+                    current
+                      ? 'border-accent-dark bg-emerald-50 font-bold text-accent-dark'
+                      : 'border-transparent text-text-muted-light hover:bg-slate-50 hover:text-accent-dark',
+                  ]}
+                >
+                  {article.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ))}
+
+    <a
+      href="/practice-finder"
+      class="mt-1 flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-3 text-[0.95rem] font-bold text-accent-dark hover:border-accent-dark transition-colors"
+    >
+      <span class="keep-icon material-symbols-outlined" style="font-size: 20px;" aria-hidden="true">explore</span>
+      Find your practice
+    </a>
+  </nav>
+</aside>
