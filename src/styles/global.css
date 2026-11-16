@@ -2,13 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------------------
+   Font weights. Lexend is a variable font, so any value from 100 to 900 works
+   and the steps can be as small as you like (e.g. 350 -> 375). Change these
+   three numbers to make the whole site lighter or bolder:
+     --weight-body ..... running text (Tailwind font-normal)
+     --weight-heading .. h1-h3 and font-serif titles (Tailwind font-medium)
+     --weight-strong ... bold text, h4, buttons (font-semibold / font-bold)
+   ------------------------------------------------------------------------- */
+:root {
+  --weight-body: 350;
+  --weight-heading: 500;
+  --weight-strong: 600;
+}
+
+body {
+  font-weight: var(--weight-body);
+}
+
+strong,
+b {
+  font-weight: var(--weight-strong);
+}
+
+/* One heading weight everywhere. Outranks Tailwind's font-bold/semibold on
+   headings, so titles stay calm instead of heavy. */
+html :is(h1, h2, h3, .font-serif) {
+  font-weight: var(--weight-heading);
+}
+
 /* Drop cap for the first paragraph of an article. Uses ::first-letter so the
    word stays whole in the HTML (screen readers and search engines read "If",
    not "I f"). Sized to sit across the first two lines of text-xl copy. */
 .drop-cap::first-letter {
   float: left;
   font-family: theme('fontFamily.serif');
-  font-weight: 700;
+  font-weight: var(--weight-strong);
   color: theme('colors.accent-dark');
   font-size: 3.6em;
   line-height: 0.82;
@@ -19,12 +48,12 @@
    Article typography. One scale for all reading text inside <article
    class="article-text">, so a page does not jump between fonts and sizes:
 
-     body text and lists ... 20px Atkinson, line-height 1.65 (18px on phones)
+     body text and lists ... 20px Lexend, line-height 1.65 (18px on phones)
      text inside a box ..... 18px (17px on phones; rounded containers with a
                              background or border, FAQ items, and
                              multi-column grids)
-     h3 .................... 22px Poppins semibold (18px on phones)
-     h4 .................... same size as body text, Atkinson bold
+     h3 .................... 22px Lexend, heading weight (18px on phones)
+     h4 .................... same size as body text, strong weight
      figcaption ............ 16px italic
 
    These rules deliberately outrank Tailwind's size/font utilities (one extra
@@ -98,14 +127,14 @@
 .article-text h3:not(:where(aside, .type-exempt) *) {
   font-family: theme('fontFamily.serif');
   font-size: var(--h3-size);
-  font-weight: 600;
+  font-weight: var(--weight-heading);
   line-height: 1.35;
 }
 
 .article-text h4:not(:where(aside, .type-exempt) *) {
   font-family: theme('fontFamily.display');
   font-size: var(--read-size);
-  font-weight: 700;
+  font-weight: var(--weight-strong);
   line-height: 1.45;
 }
 
@@ -125,14 +154,5 @@
 @media (max-width: 1023.98px) {
   :is(.material-symbols-outlined, svg[data-icon], .deco-icon):not(header *, .keep-icon) {
     display: none;
-  }
-}
-
-/* Desktop: lighter h1/h2. At 30-36px Poppins 500 reads heavy; 400 keeps the
-   hierarchy through size alone. Phones keep 500, where the headings are
-   smaller. The id outranks Tailwind's font-medium/font-semibold. */
-@media (min-width: 1024px) {
-  #main-content :is(h1, h2) {
-    font-weight: 400;
   }
 }

@@ -25,9 +25,20 @@ export default {
           paper: '#FBF8F2',
         },
       },
+      // Weights come from CSS variables (src/styles/global.css), so the whole
+      // site gets lighter or bolder by changing one number.
+      fontWeight: {
+        normal: 'var(--weight-body)',
+        medium: 'var(--weight-heading)',
+        semibold: 'var(--weight-strong)',
+        bold: 'var(--weight-strong)',
+      },
       fontFamily: {
-        display: ['Atkinson Hyperlegible', 'sans-serif'],
-        serif: ['Poppins', 'sans-serif'],
+        // Lexend for both body text and headings (font-display / font-serif).
+        // Chosen for older readers: open letter spacing, a plain zero, and
+        // I, l and 1 that look different from each other.
+        display: ['Lexend Variable', 'sans-serif'],
+        serif: ['Lexend Variable', 'sans-serif'],
       },
       borderRadius: {
         DEFAULT: '0.25rem',
