@@ -80,8 +80,7 @@ const { tocItems = [] } = Astro.props;
   const toc = document.getElementById('sidebar-toc');
 
   if (toc) {
-    // Every TOC link points at an <h2> in the article, so observing the linked
-    // headings is the same set of elements, minus any heading without an entry.
+    // Pair each TOC link with the heading it points at, in page order.
     const entries: TocEntry[] = [];
     toc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
       const heading = document.getElementById(decodeURIComponent(link.hash.slice(1)));
@@ -89,10 +88,10 @@ const { tocItems = [] } = Astro.props;
     });
 
     if (entries.length > 0) {
-      // A heading counts as "current" while it sits in a band just under the
-      // sticky header, between 96px and 30% down the viewport.
-      const BAND_TOP = 96;
-      const visible = new Set<Element>();
+      // The current section is the last heading that has scrolled above a line
+      // 30% down the viewport. Recomputed on every scroll frame rather than with
+      // an IntersectionObserver, which misses headings when the reader jumps or
+      // scrolls fast past them.
       let active: TocEntry | null = null;
 
       const setActive = (entry: TocEntry) => {
@@ -104,31 +103,29 @@ const { tocItems = [] } = Astro.props;
         active = entry;
       };
 
-      const observer = new IntersectionObserver(
-        (records) => {
-          for (const record of records) {
-            if (record.isIntersecting) visible.add(record.target);
-            else visible.delete(record.target);
-          }
+      const update = () => {
+        const line = window.innerHeight * 0.3;
+        let current = entries[0];
+        for (const entry of entries) {
+          if (entry.heading.getBoundingClientRect().top <= line) current = entry;
+          else break;
+        }
+        setActive(current);
+      };
 
-          const inBand = entries.find((entry) => visible.has(entry.heading));
-          if (inBand) {
-            setActive(inBand);
-            return;
-          }
+      let queued = false;
+      const onScroll = () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(() => {
+          queued = false;
+          update();
+        });
+      };
 
-          // Nothing in the band: either we are mid-section, or we scrolled back
-          // up out of one. Fall back to the last heading we have scrolled past.
-          let passed = entries[0];
-          for (const entry of entries) {
-            if (entry.heading.getBoundingClientRect().top < BAND_TOP) passed = entry;
-          }
-          setActive(passed);
-        },
-        { rootMargin: `-${BAND_TOP}px 0px -70% 0px`, threshold: 0 }
-      );
-
-      entries.forEach((entry) => observer.observe(entry.heading));
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
     }
   }
 </script>
