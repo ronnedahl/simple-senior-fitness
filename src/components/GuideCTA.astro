@@ -4,8 +4,9 @@
  * Usage:
  *   <GuideCTA source="fukutsuji-method" />                    full box, end of article
  *   <GuideCTA source="fukutsuji-method" variant="compact" />  slim box, mid-article
- * `source` (the page) and the variant are sent to Umami and UTM so we can see
- * which page and which box the click came from. Link and price live in
+ * The page and placement are sent to Umami (`gumroad-click`, placement `inline`
+ * for compact, `bottom` for full) and to UTM (`source`), so we can see which page
+ * and which box the click came from. Link and price live in
  * src/config/guide.ts.
  *
  * Plain link only: never add Gumroad's embed script or overlay, the site must
@@ -14,7 +15,7 @@
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import guideCover from '../assets/images/shared/fukutsuji-guide-cover.webp';
-import { GUIDE_PRICE, GUIDE_TITLE, guideLink } from '../config/guide';
+import { GUIDE_PRICE, GUIDE_PRODUCT, GUIDE_TITLE, guideLink } from '../config/guide';
 
 interface Props {
   source: string;
@@ -61,8 +62,9 @@ const highlights = [
           href={url}
           rel="noopener"
           data-umami-event="gumroad-click"
-          data-umami-event-source={source}
-          data-umami-event-placement="cta-mid"
+          data-umami-event-page={Astro.url.pathname}
+          data-umami-event-placement="inline"
+          data-umami-event-product={GUIDE_PRODUCT}
           class="inline-block whitespace-nowrap rounded-full bg-guide-ink px-6 py-3 text-base font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
         >
           Get the guide – {GUIDE_PRICE}
@@ -112,8 +114,9 @@ const highlights = [
             href={url}
             rel="noopener"
             data-umami-event="gumroad-click"
-            data-umami-event-source={source}
-            data-umami-event-placement="cta"
+            data-umami-event-page={Astro.url.pathname}
+            data-umami-event-placement="bottom"
+            data-umami-event-product={GUIDE_PRODUCT}
             class="inline-block whitespace-nowrap rounded-full bg-guide-ink px-7 py-3 text-lg font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
           >
             Get the guide – now just {GUIDE_PRICE}

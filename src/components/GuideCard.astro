@@ -4,22 +4,23 @@
  * Used in the desktop sidebar and inline on mobile, where the sidebar is hidden.
  * Usage: <GuideCard placement="sidebar" />
  *
- * The page slug and `placement` go to Umami and UTM so we can see where clicks
- * come from. Plain link only, no Gumroad script: the site must stay cookie-free.
+ * The page and placement go to Umami (`gumroad-click`) and UTM so we can see
+ * where clicks come from. Umami gets `sidebar` or `inline` (the mobile card). Plain link only, no Gumroad script: the site must stay cookie-free.
  */
 import { Image } from 'astro:assets';
 import guideCover from '../assets/images/shared/fukutsuji-guide-cover.webp';
-import { GUIDE_PRICE, GUIDE_TITLE, guideLink } from '../config/guide';
+import { GUIDE_PRICE, GUIDE_PRODUCT, GUIDE_TITLE, guideLink } from '../config/guide';
 
 interface Props {
-  placement: string;
+  placement?: string;
   class?: string;
 }
 
-const { placement, class: className } = Astro.props;
+const { placement = 'sidebar', class: className } = Astro.props;
 
 const source = Astro.url.pathname.replace(/^\/|\/$/g, '') || 'home';
 const guideUrl = guideLink(placement, source);
+const umamiPlacement = placement === 'sidebar' ? 'sidebar' : 'inline';
 ---
 
 <div class:list={["bg-guide-paper border border-stone-200 rounded-xl shadow-lg overflow-hidden", className]}>
@@ -47,8 +48,9 @@ const guideUrl = guideLink(placement, source);
       href={guideUrl}
       rel="noopener"
       data-umami-event="gumroad-click"
-      data-umami-event-source={source}
-      data-umami-event-placement={placement}
+      data-umami-event-page={Astro.url.pathname}
+      data-umami-event-placement={umamiPlacement}
+      data-umami-event-product={GUIDE_PRODUCT}
       class="flex items-center justify-center gap-2 rounded-full bg-guide-ink px-4 py-3 text-base font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
     >
       <span class="text-center">Get the guide – <span class="whitespace-nowrap">now just {GUIDE_PRICE}</span></span>
