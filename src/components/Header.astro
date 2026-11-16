@@ -1,5 +1,7 @@
 ---
 // Header component with mobile menu
+import { Image } from 'astro:assets';
+import logo from '../assets/images/shared/simple-senior-logo.png';
 import { articles, CATEGORIES } from '../data/articles.ts';
 
 // Group articles by category for the mobile nav dropdowns. Driven entirely by
@@ -24,7 +26,17 @@ const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
         class="material-symbols-outlined text-text-main-light cursor-pointer p-2 hover:bg-gray-100 rounded-full transition-colors lg:hidden"
         style="font-size: 28px;"
       >menu</button>
-      <a href="/" class="text-[1rem] lg:text-[1.2rem] font-medium lg:font-bold tracking-tight text-text-main-light font-serif hover:text-accent-dark transition-colors">Simple Senior Fitness</a>
+      <a href="/" class="shrink-0" aria-label="Simple Senior Fitness, home">
+        <Image
+          src={logo}
+          alt="Simple Senior Fitness"
+          width={450}
+          widths={[150, 300, 450]}
+          sizes="(min-width: 1024px) 180px, 150px"
+          loading="eager"
+          class="h-11 w-auto lg:h-[3.25rem]"
+        />
+      </a>
       <nav class="hidden lg:flex items-center gap-6 ml-8" aria-label="Main navigation">
         <a class="text-text-muted-light hover:text-accent-dark font-medium transition-colors" href="/">Home</a>
 
