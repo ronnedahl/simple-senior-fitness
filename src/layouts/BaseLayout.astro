@@ -42,8 +42,10 @@ const {
 const siteUrl = 'https://simpleseniorfitness.com';
 const siteName = 'Simple Senior Fitness';
 
-// Article pages get the left-hand practice navigation on wide screens.
-const showSideNav = articles.some((article) => article.url === (Astro.url.pathname.replace(/\/+$/, '') || '/'));
+// The home page and article pages get the left-hand practice navigation on
+// wide screens.
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const showSideNav = currentPath === '/' || articles.some((article) => article.url === currentPath);
 ---
 
 <!DOCTYPE html>
