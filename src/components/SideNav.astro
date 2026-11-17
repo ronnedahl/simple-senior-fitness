@@ -1,9 +1,10 @@
 ---
 /**
- * SideNav: left-hand practice navigation on article pages, desktop only (1400px and
- * up). Lists every article grouped by category, marks the current one, and stays
- * in view while the reader scrolls. Generated from src/data/articles.ts, like
- * the header menu, so new articles show up here automatically.
+ * SideNav: left-hand practice navigation on the home page and article pages,
+ * desktop only (1400px and up). Lists every article grouped by category, marks
+ * the current one, and stays in view while the reader scrolls. Generated from
+ * src/data/articles.ts, like the header menu, so new articles show up here
+ * automatically.
  *
  * Rendered by BaseLayout next to the page content; pages do not include it.
  * The column stretches to the full page height (default flex `align-items`),
@@ -41,7 +42,7 @@ const groups = CATEGORIES.map((category) => ({
                   href={article.url}
                   aria-current={current ? 'page' : undefined}
                   class:list={[
-                    'block rounded-lg border-l-4 px-3 py-1 text-[0.95rem] leading-snug transition-colors',
+                    'block rounded-lg border-l-4 px-3 py-0.5 text-[0.95rem] leading-snug transition-colors',
                     current
                       ? 'border-accent-dark bg-emerald-50 font-bold text-accent-dark'
                       : 'border-transparent text-text-muted-light hover:bg-slate-50 hover:text-accent-dark',
