@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SafetyNotice from '../components/SafetyNotice.astro';
 import MedicalDisclaimer from '../components/MedicalDisclaimer.astro';
 import Sidebar from '../components/Sidebar.astro';
 import TraditionCard from '../components/TraditionCard.astro';
@@ -37,6 +38,8 @@ import radioSteps9 from '../assets/images/rajio-taiso-radio-calisthenics/radio-t
 
     <div class="lg:grid lg:grid-cols-12 lg:gap-12">
       <article class="article-text lg:col-span-8 space-y-8">
+        <SafetyNotice />
+
 
         <!-- Hero Image -->
         <figure class="mb-8">

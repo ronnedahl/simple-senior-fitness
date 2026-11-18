@@ -5,6 +5,7 @@
 // add datePublished/dateModified and a real date under the byline, and link
 // to it from related pages.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SafetyNotice from '../components/SafetyNotice.astro';
 import MedicalDisclaimer from '../components/MedicalDisclaimer.astro';
 import Sidebar from '../components/Sidebar.astro';
 import PioneerCard from '../components/PioneerCard.astro';
@@ -72,6 +73,8 @@ const faqSchema = {
 
     <div class="lg:grid lg:grid-cols-12 lg:gap-12">
       <article class="article-text lg:col-span-8 space-y-8">
+        <SafetyNotice />
+
 
         <p class={`drop-cap ${body}`}>
           The Japanese towel method looks almost too simple to get wrong: roll up a towel, lie on it, breathe. Yet many people try it once or twice, feel uncomfortable or feel nothing at all, and give up. Often the cause is one of a handful of small, fixable mistakes. Here are nine common ones, and what to do instead.

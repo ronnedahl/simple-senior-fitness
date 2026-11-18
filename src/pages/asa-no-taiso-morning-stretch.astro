@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SafetyNotice from '../components/SafetyNotice.astro';
 import Sidebar from '../components/Sidebar.astro';
 import TraditionCard from '../components/TraditionCard.astro';
 import morningStretchImage from '../assets/images/asa-no-taiso-morning-stretch/morning-stretch-routine.png';
@@ -37,6 +38,8 @@ import asaPhase45 from '../assets/images/asa-no-taiso-morning-stretch/asa-no-tai
 
     <div class="lg:grid lg:grid-cols-12 lg:gap-12">
       <article class="article-text lg:col-span-8 space-y-8">
+        <SafetyNotice />
+
 
         <!-- Hero Image -->
         <figure class="mb-8">

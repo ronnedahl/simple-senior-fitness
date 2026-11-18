@@ -1,0 +1,35 @@
+---
+// SafetyNotice: short safety note at the top of every article, before the
+// reader tries any exercise. It says plainly that we are not health
+// professionals and that readers should check with their own doctor,
+// chiropractor or physiotherapist first. The longer MedicalDisclaimer at the
+// end of the article stays as it is.
+//
+// Inside <article class="article-text">, the global reading-text rules skip
+// <aside>, so the sizes set here are the ones that apply.
+---
+<aside
+  role="note"
+  aria-labelledby="safety-notice-title"
+  class="mb-8 rounded-xl border-2 border-amber-300 bg-amber-50 px-4 py-3.5 sm:px-5 sm:py-4"
+>
+  <div class="flex items-start gap-2.5">
+    <span class="material-symbols-outlined text-amber-700 text-2xl shrink-0" aria-hidden="true">health_and_safety</span>
+    <div>
+      <p id="safety-notice-title" class="font-bold text-base sm:text-lg text-text-main-light mb-1">
+        Please read before you start
+      </p>
+      <p class="text-sm sm:text-base leading-normal text-text-main-light text-pretty mb-1.5">
+        We are not doctors, chiropractors or physiotherapists. This page shares
+        traditional Japanese practices for general information only. It is not
+        medical advice.
+      </p>
+      <p class="text-sm sm:text-base leading-normal text-text-main-light text-pretty">
+        <strong>Talk to your doctor, chiropractor or physiotherapist before you
+        try anything here</strong>, especially if you have pain, an injury,
+        osteoporosis, heart or blood pressure problems, or recent surgery. Move
+        gently, and stop straight away if something hurts or you feel dizzy.
+      </p>
+    </div>
+  </div>
+</aside>
