@@ -72,18 +72,26 @@ html :is(h1, h2, h3, .font-serif) {
   line-height: 1.65;
 }
 
-/* Phones: one step smaller. At 20px a 390px-wide screen fits only ~33
-   characters per line, so paragraphs turn into long thin columns. 18px still
-   sits well above the 16px default for older readers. */
+/* Phones: smaller. Lexend is a wide font: at 20px a 390px-wide screen fits
+   only ~33 characters per line, and even at 18px lines broke early and left
+   big ragged gaps. 17px gives ~40 characters per line and still sits above
+   the 16px default for older readers. */
 @media (max-width: 639.98px) {
   .article-text {
-    --read-size: 1.125rem;
-    --box-size: 1.0625rem;
+    --read-size: 1.0625rem;
+    --box-size: 1rem;
     --h3-size: 1.125rem;
   }
 }
 
-/* Phones: h1 24px, h2 19px. Tailwind's mobile sizes put h2 (24px) above
+/* Balanced line breaks: the browser avoids leaving a single word alone on
+   the last line and evens out ragged lines. Browsers without support simply
+   wrap as before. */
+.article-text :is(p, li, dd, figcaption) {
+  text-wrap: pretty;
+}
+
+/* Phones: h1 24px, h2 24px. Tailwind's mobile sizes put h2 (24px) above
    h1 (19px), so the page title looked less important than its sections.
    Tight line-heights stop wrapped headings from drifting apart (h2 was
    inheriting the 1.65 reading line-height). h3 steps down to 18px so it
@@ -95,7 +103,7 @@ html :is(h1, h2, h3, .font-serif) {
   }
 
   #main-content h2 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     line-height: 1.35;
   }
 }

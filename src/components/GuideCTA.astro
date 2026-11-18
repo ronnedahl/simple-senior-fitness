@@ -74,7 +74,7 @@ const highlights = [
   </aside>
 ) : (
   <aside
-    class="my-12 rounded-2xl border border-stone-200 bg-guide-paper p-6 sm:p-8 shadow-sm"
+    class="my-12 rounded-2xl border border-stone-200 bg-guide-paper px-5 py-6 sm:p-8 shadow-sm"
     aria-labelledby={titleId}
   >
     <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
@@ -87,14 +87,14 @@ const highlights = [
         class="w-40 sm:w-48 h-auto shrink-0 rounded-xl shadow-md"
       />
 
-      <div class="flex-1 text-center sm:text-left">
+      <div class="min-w-0 w-full flex-1 text-center sm:text-left">
         <p class="text-sm font-bold uppercase tracking-widest text-guide-clay mb-2">
           PDF guide for adults 50+
         </p>
         <h2 id={titleId} class="font-serif text-2xl sm:text-3xl font-semibold text-guide-ink leading-tight mb-3">
           Ready for a simple daily routine?
         </h2>
-        <p class="text-lg text-stone-700 leading-relaxed mb-4">
+        <p class="text-base sm:text-lg text-stone-700 leading-relaxed text-pretty mb-4">
           <strong>{GUIDE_TITLE}</strong> is a gentle, day-by-day plan built
           around the Japanese towel method. Start with one minute and build up to five, with illustrated
           placements, neck and shoulder stretches, and a printable tracker.
@@ -117,7 +117,7 @@ const highlights = [
             data-umami-event-page={Astro.url.pathname}
             data-umami-event-placement="bottom"
             data-umami-event-product={GUIDE_PRODUCT}
-            class="inline-block whitespace-nowrap rounded-full bg-guide-ink px-7 py-3 text-lg font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
+            class="block w-full sm:inline-block sm:w-auto text-center sm:whitespace-nowrap rounded-full bg-guide-ink px-5 sm:px-7 py-3 text-base sm:text-lg font-semibold text-white no-underline hover:bg-guide-ink-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-guide-ink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-guide-paper transition-colors"
           >
             Get the guide – now just {GUIDE_PRICE}
           </a>
